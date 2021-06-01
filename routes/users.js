@@ -23,11 +23,11 @@ const userValidator = [
     .withMessage("Email can not be greater than 50 characters")
     .isEmail()
     .withMessage("Email is not valid")
-    .custom((value)=>{
+    .custom((value) => {
       return db.User.findOne({
-        Where: { email : value }
+        Where: { email: value }
       }).then((user) => {
-        if(user){
+        if (user) {
           return Promise.reject("Email already exists, please log in");
         }
       })
@@ -42,8 +42,8 @@ const userValidator = [
     .withMessage("Please confirm your password")
     .isLength({ max: 50 })
     .withMessage("Password can not be greater than 50 characters")
-    .custom((value, {req}) => {
-      if(value !== req.body.password){
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
         throw new Error("Passwords don't match");
       }
       return true;
@@ -69,7 +69,7 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
   const { user_name, email, first_name, last_name, password } = req.body;
   const validationErrors = validationResult(req);
 
-  if(validationErrors.isEmpty()){    
+  if (validationErrors.isEmpty()) {
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
       user_name,
@@ -80,11 +80,12 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
     })
     res.redirect("/");
   } else {
-    const errors = validationErrors.array().map( error => {
-      error.msg;
+    const errors = validationErrors.array().map((error) => {
+      return error.msg;
     })
+    console.log(errors)
     res.render('new-user', {
-      csurdToken: req.csrfToken(),
+      csurfToken: req.csrfToken(),
       errors
     });
   }

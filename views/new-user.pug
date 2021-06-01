@@ -1,25 +1,30 @@
 extends index
 
 block content
-    form(method="post" action="/users/new")
-        input(type="hidden", name="_csrf", value= csrfToken)
+        if errors
+            ul
+                each err in errors
+                    li=err
 
-        label(for="user_name") User Name
-        input(type="text", name="user_name", value="")
-
-        label(for="email") Email
-        input(type="email", name="email", value="")
-
-        label(for="first_name") First Name
-        input(type="text", name="first_name", value="")
-
-        label(for="last_name") Last Name
-        input(type="text", name="last_name", value="")
-
-        label(for="password") Password
-        input(type="text", name="password", value="")
-
-        label(for="check_password") Confirm Password
-        input(type="text", name="check_password", value="")
-
-        button(type="submit") Sign Up
+        form(method="post" action="/users/new")
+            input(type="hidden", name="_csrf", value= csrfToken)
+            div
+            label(for="user_name") User Name
+            input(type="text", name="user_name", value="")
+            div
+            label(for="email") Email
+            input(type="email", name="email", value="")
+            div
+            label(for="first_name") First Name
+            input(type="text", name="first_name", value="")
+            div
+            label(for="last_name") Last Name
+            input(type="text", name="last_name", value="")
+            div
+            label(for="password") Password
+            input(type="text", name="password", value="")
+            div
+            label(for="check_password") Confirm Password
+            input(type="text", name="check_password", value="")
+            div
+            button(type="submit") Sign Up
