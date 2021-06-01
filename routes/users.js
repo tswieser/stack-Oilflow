@@ -9,17 +9,17 @@ const userValidator = [
   check('first_name')
     .exists({ checkFalsy: true })
     .withMessage("PLease enter your first name")
-    .isLength({ max: 50 })
+    .isLength({ max: 200 })
     .withMessage("First name can not be greater than 50 characters"),
   check('last_name')
     .exists({ checkFalsy: true })
     .withMessage("PLease enter your last name")
-    .isLength({ max: 50 })
+    .isLength({ max: 200 })
     .withMessage("last name can not be greater than 50 characters"),
   check('email')
     .exists({ checkFalsy: true })
     .withMessage("Please enter an Email")
-    .isLength({ max: 50 })
+    .isLength({ max: 200 })
     .withMessage("Email can not be greater than 50 characters")
     .isEmail()
     .withMessage("Email is not valid")
@@ -35,12 +35,12 @@ const userValidator = [
   check("password")
     .exists({ checkFalsy: true })
     .withMessage("Please enter an Password")
-    .isLength({ max: 50 })
+    .isLength({ max: 200 })
     .withMessage("Password can not be greater than 50 characters"),
   check("check_password")
     .exists({ checkFalsy: true })
     .withMessage("Please confirm your password")
-    .isLength({ max: 50 })
+    .isLength({ max: 200 })
     .withMessage("Password can not be greater than 50 characters")
     .custom((value, { req }) => {
       if (value !== req.body.password) {
