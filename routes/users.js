@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const { User } = require('../db/models')
-const csrf = require('csurf');
 const bcrypt = require('bcryptjs');
-
-const csrfProtection = csrf({cookie: true});
-const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
+const { csrfProtection, asyncHandler } = require('./utils');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
