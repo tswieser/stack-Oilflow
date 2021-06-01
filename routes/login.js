@@ -2,7 +2,10 @@ const express = require("express");
 const loginRouter = express.Router();
 const { asyncHandler, csrfProtection } = require('./utils')
 const { check, validationResult } = require('express-validator')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const {User} = require('../db/models')
+// const cookieParser = require('cookie-parser')
+
 
 
 loginRouter.get("/", (req, res, next) => {
@@ -18,27 +21,28 @@ const loginValidators = [
         .withMessage("You must enter a password."),
 ];
 
-loginRouter.post("/", loginValidators, csrfProtection, asyncHandler(async (req, res, next) => {
+loginRouter.post("/", loginValidators, asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
     const validationErrors = validationResult(req);
     const errors = [];
+    console.log(validationErrors)
 
 
     if (validationErrors.isEmpty()) {
-        const user = await User.findOne({
+        const user = User.findOne({
             where: { email }
         })
+        const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
         if (user) {
-            const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
             if (passMatch) {
                 //to do login
-                res.redirect('/')
+                res.send('JLDSHFAKJSDJ')
             } else {
                 errors.push('Login password/email combination is not valid.')
             }
         }
     } else {
-        res.render('login', { csrfToken: req.csrfToken(), errors });
+        res.redirect('/')
     }
 
 }));

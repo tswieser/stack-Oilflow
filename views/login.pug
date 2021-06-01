@@ -1,9 +1,8 @@
-extends index
 
 form(action="/users/login" method="post")
   input(type="hidden" name="_csrf" value=csrfToken)
   label(for="email") Email
   input(type="email" name="email")
   label(for="password") Password
-  input(type="password" )
+  input(type="password" name="password")
   button(type="submit") Submit
