@@ -11,15 +11,15 @@ module.exports = (sequelize, DataTypes) => {
     const columnMapping_answer = {
       through: "Answer_likes",
       foreignKey: "user_id",
-      otherKey: "user_id"
+      otherKey: "answer_id"
     }
     const columnMapping_question = {
       through: "Question_likes",
       foreignKey: "user_id",
-      otherKey: "user_id"
+      otherKey: "question_id"
     }
-    User.hasMany(models.Answer_like, columnMapping_answer);
-    User.hasMany(models.Question_like, columnMapping_question);
+    User.belongsToMany(models.Answer, columnMapping_answer);
+    User.belongsToMany(models.Question, columnMapping_question);
   };
   return User;
 };
