@@ -16,9 +16,6 @@ const questionValidator = [
 
 ]
 
-
-
-
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     const questions = await Question.findAll();
 
@@ -28,19 +25,10 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     })
 }))
 
-
-
-
-
-
-
-
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
     res.render("ask-question", { title: "Ask Question", csrfToken: req.csrfToken(), })
 
 }))
-
-
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
@@ -71,8 +59,7 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, r
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
 
-    res.render('question-id', {
-        title: 'Question',
+    res.render('questions-id', {
         question,
         csrfToken: req.csrfToken()
     });

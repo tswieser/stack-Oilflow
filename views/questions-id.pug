@@ -2,5 +2,19 @@ extends index
 
 block content
 
-    p=question.question_title
+    h1=question.question_title
     p=question.question_body
+
+
+
+    //- each question in questions
+    //-     div
+    //-         p=question.question_title
+    //-         p=question.question_body
+
+    form(action="/questions/id" method="post")
+        input(type="hidden" name="_csrf" value=csrfToken)
+        h2 Your Answer
+        textarea(name="", cols="30", rows="10")
+        button(type="submit") Post Your Answer
+
