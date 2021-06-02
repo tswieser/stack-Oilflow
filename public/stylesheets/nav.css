@@ -1,0 +1,11 @@
+#nav_bar {
+    background-color: yellow;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+#inactive {
+
+    
+}
