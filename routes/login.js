@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs');
 const { User } = require('../db/models')
 const cookieParser = require('cookie-parser')
+const { loginUser } = require("../auth");
 
 loginRouter.use(cookieParser());
 
