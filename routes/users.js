@@ -4,6 +4,7 @@ const { User } = require('../db/models')
 const bcrypt = require('bcryptjs');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const db = require('../db/models');
+const { loginUser, logoutUser } = require('../auth')
 
 const userValidator = [
   check('first_name')
@@ -72,14 +73,16 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
 
   if (validationErrors.isEmpty()) {
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({
+    const user = await User.create({
       user_name,
       email,
       first_name,
       last_name,
       hashed_password: hashedPassword
     })
+    loginUser(req, res, user)
     res.redirect("/");
+    
   } else {
     const errors = validationErrors.array().map((error) => {
       return error.msg;

@@ -40,6 +40,7 @@ store.sync();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/users/login', loginRouter);
+// app.use('/login', loginRouter); <=== uncomment( for login )
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
