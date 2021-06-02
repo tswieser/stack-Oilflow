@@ -7,7 +7,6 @@ append head
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
-block content
   h1= title
   div
     nav(id="nav_bar")
@@ -22,3 +21,4 @@ block content
       div(class="nav_forms")
         a(href="/users/login" class="" id="login-nav") Log in
         a(href="/users/new" class="" id="signup-nav") Sign up
+block content
