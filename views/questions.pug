@@ -1,7 +1,11 @@
 extends index
 
 block content
-    each question in questions
-        div
-            a(href=`/questions/${question.id}`)=question.question_title
-            p=question.question_body
+    div.main_bar
+        div.header_div
+            h2 All Questions
+            a(href="/users/new" id="signup-nav") Sign up
+        each question in questions
+            div.question_div
+                a(href=`/questions/${question.id}`)=question.question_title
+                p=question.question_body
