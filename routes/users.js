@@ -4,6 +4,7 @@ const { User } = require('../db/models')
 const bcrypt = require('bcryptjs');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const db = require('../db/models');
+const { loginUser, logoutUser } = require('../auth')
 
 const userValidator = [
   check('first_name')
