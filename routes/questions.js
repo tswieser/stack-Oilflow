@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Question } = require('../db/models');
+const { User, Question, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth')
 
@@ -16,26 +16,20 @@ const questionValidator = [
 
 ]
 
-
-
-
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    const questions = await Question.findAll({ include: question_votes });
-
+    const questions = await Question.findAll({ include: User });
+    console.log(questions);
     res.render('questions', {
         title: 'Questions',
         questions
     })
+
 }))
-
-
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
     res.render("ask-question", { title: "Ask Question", csrfToken: req.csrfToken(), })
 
 }))
-
-
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
@@ -73,6 +67,7 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, r
         csrfToken: req.csrfToken()
     });
 }))
+
 
 
 
