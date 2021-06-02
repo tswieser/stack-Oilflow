@@ -73,7 +73,7 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
 
   if (validationErrors.isEmpty()) {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
+    await User.create({
       user_name,
       email,
       first_name,
@@ -82,7 +82,6 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
     })
     loginUser(req, res, user)
     res.redirect("/");
-    
   } else {
     const errors = validationErrors.array().map((error) => {
       return error.msg;
