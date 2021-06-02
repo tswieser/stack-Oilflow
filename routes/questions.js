@@ -67,7 +67,16 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
 
 }))
 
+router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+    const questionsId = parseInt(req.params.id, 10)
+    const question = await Question.findByPk(questionsId)
 
+    res.render('question-id', {
+        title: 'Question',
+        question,
+        csrfToken: req.csrfToken()
+    });
+}))
 
 
 
