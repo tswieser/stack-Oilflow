@@ -1,8 +1,19 @@
 
-form(action="/users/login" method="post")
-  input(type="hidden" name="_csrf" value=csrfToken)
-  label(for="email") Email
-  input(type="email" name="email")
-  label(for="password") Password
-  input(type="password" name="password")
-  button(type="submit") Submit
+extends index
+
+block content
+        if errors
+            ul.error_list
+                each err in errors
+                    li=err
+        div.form_container
+          form(action="/users/login" method="post" class= "signup")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            div
+            label(for="email") Email
+            input(type="email" name="email" class="signup_input")
+            div
+            label(for="password") Password
+            input(type="password" name="password" class="signup_input")
+            div
+            button(type="submit" class="signup_btn") Submit
