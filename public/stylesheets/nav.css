@@ -7,6 +7,7 @@
     font-size: 13px;
     font-weight: 400;
     box-shadow: 0px;
+    border-top: 3px solid #F78222;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,6 +20,12 @@ a {
 }
 
 #navbar_search {
+    background-image: url('../images/loupe.png');
+    background-color: blue;
+    background-size: 17px;
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: 7px;
     height: 35.2px;
     background-color: white;
     padding: 7.8px 9.1px 7.8px 32px;
@@ -26,18 +33,13 @@ a {
     margin: 0;
     border: 1px solid #bbc0c4;
     border-radius: 3px;
-    font-size: 13px;
     font-family: inherit;
     max-width: 638px;
     /* border-radius: none; */
 }
 
-#inactive {
-
-}
-
 .nav_forms {
-
+    padding-right: 130px;
 }
 
 #login-nav {
@@ -46,12 +48,16 @@ a {
     border: 1px solid ;
     display: inline-block;
     color: #39739D;
+    font-size: 13px;
     background-color: #e1ecf4;
     padding: .8em;
-    margin: 2px;
+    margin-right: 4px;
+    height: 35.2px;
+    justify-content: center;
 }
 
 #signup-nav{
+    font-size: 13px;
     position: relative;
     border-radius: 3px;
     border: 1px solid ;
@@ -60,4 +66,5 @@ a {
     background-color: #0095FF;
     padding: .8em;
     margin: 2px;
+    height: 35.2px
 }
