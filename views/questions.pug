@@ -1,7 +1,7 @@
 extends index
 
-block content 
+block content
     each question in questions
         div
-            p=question.question_title
+            a(href=`/questions/${question.id}`)=question.question_title
             p=question.question_body
