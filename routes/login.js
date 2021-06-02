@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs');
 const { User } = require('../db/models')
 const cookieParser = require('cookie-parser')
+const { loginUser } = require("../auth");
 
 loginRouter.use(cookieParser());
 
@@ -32,6 +33,7 @@ loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, 
         if (user) {
             const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
             if (passMatch) {
+                loginUser(req, res, user)
                 return res.redirect('/')
             }
         }

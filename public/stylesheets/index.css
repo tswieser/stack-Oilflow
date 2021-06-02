@@ -18,8 +18,12 @@ h1 {
     display: flex;
     align-items: center;
     align-content: space-around;
-    justify-content: flex-end;
+    justify-content: center;
     margin:50px 50px 0px 0px ;
+}
+
+.form_container a {
+    color: #0077CC;
 }
 
 .signup{
@@ -39,7 +43,7 @@ h1 {
     font-weight: 600;
 }
 .signup_input{
-    
+
 	display: block;
 	margin: 10px 0 0 0;
     border: 1px solid rgb(187, 187, 187);
