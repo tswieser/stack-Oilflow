@@ -25,7 +25,7 @@ const userValidator = [
     .withMessage("Email is not valid")
     .custom((value) => {
       return db.User.findOne({
-        Where: { email: value }
+        where: { email: value }
       }).then((user) => {
         if (user) {
           return Promise.reject("Email already exists, please log in");
@@ -61,6 +61,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/new', csrfProtection, async (req, res) => {
   res.render("new-user", {
+    title: "signup",
     csrfToken: req.csrfToken()
   });
 })
@@ -83,13 +84,14 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
     const errors = validationErrors.array().map((error) => {
       return error.msg;
     })
-    console.log(errors)
     res.render('new-user', {
-      csurfToken: req.csrfToken(),
+      csrfToken: req.csrfToken(),
       errors
     });
   }
 }))
+
+
 
 
 module.exports = router;
