@@ -4,12 +4,13 @@ const { asyncHandler, csrfProtection } = require('./utils')
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs');
 const { User } = require('../db/models')
-// const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 
-
+loginRouter.use(cookieParser());
 
 loginRouter.get("/", csrfProtection, asyncHandler(async (req, res, next) => {
-    res.render("login")
+
+    res.render("login", { csrfToken: req.csrfToken() })
 }));
 
 const loginValidators = [
@@ -21,20 +22,17 @@ const loginValidators = [
         .withMessage("You must enter a password."),
 ];
 
-loginRouter.post("/", loginValidators, csrfProtection, asyncHandler(async (req, res, next) => {
+loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
     const validationErrors = validationResult(req);
     const errors = [];
-
-
 
     if (validationErrors.isEmpty()) {
         const user = await User.findOne({ where: { email } })
         if (user) {
             const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
             if (passMatch) {
-
-                return res.redirect('/', { csrfToken: req.csrfToken() })
+                return res.redirect('/')
             }
         }
         errors.push('Login password/email combination is not valid.')
@@ -45,7 +43,6 @@ loginRouter.post("/", loginValidators, csrfProtection, asyncHandler(async (req, 
             csrfToken: req.csrfToken()
         })
     }
-
 }));
 
 
