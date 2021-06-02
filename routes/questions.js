@@ -43,16 +43,17 @@ router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
 
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
-    const { question_title, question_body } = req.body;
+    const { question_title, question_body, user_id } = req.body;
     const validationErrors = validationResult(req);
+    console.log(res.locals.user.id, user_id)
 
     if (validationErrors.isEmpty()) {
         await Question.create({
-            userId: res.locals.user.id,
+            user_id: res.locals.user.id,
             question_title,
             question_body
         })
-        res.redirect("/question");
+        res.redirect("/questions");
 
     } else {
         const errors = validationErrors.array().map((error) => {
@@ -63,6 +64,7 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
             errors
         });
     }
+
 }))
 
 
