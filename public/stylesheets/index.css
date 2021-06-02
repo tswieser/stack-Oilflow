@@ -18,8 +18,12 @@ h1 {
     display: flex;
     align-items: center;
     align-content: space-around;
-    justify-content: flex-end;
+    justify-content: center;
     margin:50px 50px 0px 0px ;
+}
+
+.form_container a {
+    color: #0077CC;
 }
 
 .signup{

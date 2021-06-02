@@ -3,11 +3,10 @@ extends layout
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="../stylesheets/index.css")
-  link(rel="stylesheet" href="../public/stylesheets/nav.css")
+  link(rel="stylesheet" href="../stylesheets/nav.css")
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
-block content
   h1= title
   div
     nav(id="nav_bar")
@@ -17,8 +16,9 @@ block content
         a(href="http://") Profile
       div
         a(href="/") Stack oil Flow
-        a(href="/about") About
-      input(type="text" placeholder="Search...")
-      div(class="forms")
-        a(href="/users/login" id="login-nav") Log in
-        a(href="/users/new" id="signup-nav") Sign up
+        a(href="/about" id="navbar_about") About
+      input(type="text" placeholder="Search..." id="navbar_search" img)
+      div(class="nav_forms")
+        a(href="/users/login" class="" id="login-nav") Log in
+        a(href="/users/new" class="" id="signup-nav") Sign up
+block content
