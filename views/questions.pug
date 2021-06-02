@@ -4,8 +4,15 @@ block content
     div.main_bar
         div.header_div
             h2 All Questions
-            a(href="/users/new" id="signup-nav") Sign up
-        each question in questions
-            div.question_div
-                a(href=`/questions/${question.id}`)=question.question_title
-                p=question.question_body
+            a(href="/questions/ask" class= "signup_btn") Ask Question
+
+    each question in questions
+        div.question_div
+            div.stats
+                div.votes_div
+                    strong=questions.question_votes
+                    p Votes
+                div.answers_div
+                    p Answers
+            a(href=`/questions/${question.id}`)=question.question_title
+            p=question.question_body

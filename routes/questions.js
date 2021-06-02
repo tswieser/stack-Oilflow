@@ -20,7 +20,7 @@ const questionValidator = [
 
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    const questions = await Question.findAll();
+    const questions = await Question.findAll({ include: question_votes });
 
     res.render('questions', {
         title: 'Questions',
