@@ -80,6 +80,7 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
       last_name,
       hashed_password: hashedPassword
     })
+    loginUser(req, res, user)
     res.redirect("/");
   } else {
     const errors = validationErrors.array().map((error) => {
