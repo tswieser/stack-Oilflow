@@ -10,21 +10,23 @@ const answerValidators = [
         .withMessage("Answer cannot be empty.")
 ];
 
-router.post('/', csrfProtection, requireAuth, answerValidators, asyncHandler(async (req, res, next) => {
-    const { answer_body, question_id } = req.body;
+router.post('/:id', csrfProtection, requireAuth, answerValidators, asyncHandler(async (req, res, next) => {
+    const { answer_body } = req.body;
     const validationErrors = validationResult(req)
-    const id = req.params.id
-    const question = await Question.findOne({ where: question_id })
-    const answers = await Answer.findAll();
-    // console.log(`THIS IS THE QUESTION LOG`, question.id)
+    const question = await Question.findByPk(req.params.id)
+    const answers = await Answer.findAll({
+        where: {
+            question_id: req.params.id
+        }
+    });
+
     if (validationErrors.isEmpty()) {
         await Answer.create({
             question_id: question.id,
             user_id: res.locals.user.id,
             answer_body
         })
-        // console.log(question.id)
-        res.render(`questions-id`, { answers, question, csrfToken: req.csrfToken() });
+         res.render(`questions-id`, { answers, question, csrfToken: req.csrfToken() });
     } else {
         const errors = validationErrors.array().map((error) => {
             return error.msg;
@@ -34,6 +36,7 @@ router.post('/', csrfProtection, requireAuth, answerValidators, asyncHandler(asy
             errors
         });
     }
+    return
 }))
 
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Question } = require('../db/models');
+const { User, Question, Answer } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth')
 
@@ -12,7 +12,7 @@ const questionValidator = [
         .withMessage("Title can not be greater than 200 characters"),
     check('question_body')
         .exists({ checkFalsy: true })
-        .withMessage("PLease enter your question")
+        .withMessage("Please enter your question")
 
 ]
 
@@ -60,11 +60,12 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
 router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
-
-    res.render('questions-id', {
-        question,
-        csrfToken: req.csrfToken()
+    const answers = await Answer.findAll({
+        where: {
+            question_id: req.params.id
+        }
     });
+    res.render('questions-id', { answers, question, csrfToken: req.csrfToken() });
 }))
 
 
