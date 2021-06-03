@@ -1,7 +1,8 @@
 extends index
 
-block content 
-    each question in questions
-        div
-            p=question.question_title
-            p=question.question_body
+block content
+    if questions
+        each question in questions
+            div
+                p=question.question_title
+                p=question.question_body
