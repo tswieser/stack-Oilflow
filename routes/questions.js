@@ -35,6 +35,8 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     
     console.log(question);
     // const questionVotes = question.dataValues.Question_likes;
+    const questions = await Question.findAll();
+
     res.render('questions', {
         title: 'Questions',
         questions
@@ -70,6 +72,9 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
     }
 }))
 
+router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+    const questionsId = parseInt(req.params.id, 10)
+    const question = await Question.findByPk(questionsId)
 
 router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const questionsId = parseInt(req.params.id, 10)
@@ -82,6 +87,12 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, r
     });
 }))
 
+    res.render('questions-id', {
+        question,
+        title: "Question",
+        csrfToken: req.csrfToken()
+    });
+}))
 
 
 
