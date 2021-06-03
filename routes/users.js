@@ -68,12 +68,12 @@ router.get('/new', csrfProtection, async (req, res) => {
 })
 
 router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res, next) => {
-  const { user_name, email, first_name, last_name, password } = req.body;
+  const { user_name, email, first_name, last_name, password, user } = req.body;
   const validationErrors = validationResult(req);
 
   if (validationErrors.isEmpty()) {
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({
+    const user = await User.create({
       user_name,
       email,
       first_name,

@@ -1,7 +1,7 @@
 #nav_bar {
     background-color: #fafafb;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 47px;
     font-size: 13px;
@@ -15,8 +15,20 @@ a {
     text-decoration: none;
 }
 
+#logo_letters {
+    margin-left: 30px;
+    background-image: url('../images/3oillogo.jpeg');
+}
+
 #navbar_about {
-    font-size: 11px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 12px;
+    color: rgb(110, 109, 109);
+}
+
+#navbar_homepage {
+    font-weight: 1000;
 }
 
 #navbar_search {
@@ -35,10 +47,10 @@ a {
     border-radius: 3px;
     font-family: inherit;
     max-width: 638px;
-    /* border-radius: none; */
 }
 
 .nav_forms {
+    margin-left: 30px;
     padding-right: 130px;
 }
 
@@ -55,6 +67,9 @@ a {
     height: 35.2px;
     justify-content: center;
 }
+#login-nav:hover {
+    background-color: #c6dcec;
+}
 
 #signup-nav{
     font-size: 13px;
@@ -67,4 +82,7 @@ a {
     padding: .8em;
     margin: 2px;
     height: 35.2px
+}
+#signup-nav:hover {
+    background-color: #0576c7;
 }

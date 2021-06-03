@@ -7,13 +7,14 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Question.associate = function(models) {
     const columnMapping = {
-      through: "Question_likes",
+      through: "Question_like",
       otherKey: "user_id",
       foreignKey: "question_id"
     }
 
     Question.hasMany(models.Answer, {foreignKey: "question_id"});
     Question.belongsToMany(models.User, columnMapping);
+    Question.hasMany(models.Question_like, {foreignKey: "question_id"});
   };
   return Question;
 };

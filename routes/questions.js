@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { User, Question } = require('../db/models');
+const { User, Question, Answer, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
-const { requireAuth } = require('../auth')
+const { requireAuth } = require('../auth');
+
 
 const questionValidator = [
     check('question_title')
@@ -16,31 +17,43 @@ const questionValidator = [
 
 ]
 
-
-
-
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    const questions = await Question.findAll({ include: question_votes });
+    const questions = await Question.findAll({ 
+        include: [ Answer, Question_like ]
+    });
+    
+    const question = questions.map(question => {
+        return question.dataValues.Question_likes;
+    })
+    
+
+    // const voteCount = question.reduce(vote => {
+    //     if
+
+
+    // })
+    
+    console.log(question);
+    // const questionVotes = question.dataValues.Question_likes;
+
 
     res.render('questions', {
-        title: 'Questions',
+        // title: 'Questions',
         questions
     })
 }))
 
-
-
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
-    res.render("ask-question", { title: "Ask Question", csrfToken: req.csrfToken(), })
-
+    res.render("ask-question", {
+        title: "Ask Question",
+        csrfToken: req.csrfToken(),
+    })
 }))
-
-
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
     const validationErrors = validationResult(req);
-    console.log(res.locals.user.id, user_id)
+    // console.log(res.locals.user.id, user_id)
 
     if (validationErrors.isEmpty()) {
         await Question.create({
@@ -59,9 +72,11 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
             errors
         });
     }
-
 }))
 
+router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+    const questionsId = parseInt(req.params.id, 10)
+    const question = await Question.findByPk(questionsId)
 
 router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const questionsId = parseInt(req.params.id, 10)
@@ -70,6 +85,13 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, r
     res.render('question-id', {
         title: 'Question',
         question,
+        csrfToken: req.csrfToken()
+    });
+}))
+
+    res.render('questions-id', {
+        question,
+        title: "Question",
         csrfToken: req.csrfToken()
     });
 }))
