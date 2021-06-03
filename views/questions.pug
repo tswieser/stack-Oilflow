@@ -1,8 +1,20 @@
 extends index
 
 block content
-    if questions
+    div.main_bar
+        div.header_div
+            h2#questions_title All Questions
+            a(href="/questions/ask" class= "blue_btn") Ask Question
+
         each question in questions
-            div
-                p=question.question_title
-                p=question.question_body
+            div.question_div
+                div.stats
+                    div.votes_div
+                        p=question.dataValues.Question_likes
+                        p votes
+                    div.answers_div
+                        p=question.dataValues.Answers.length
+                        p answers
+                div.content_div
+                    a(href=`/questions/${question.id}` class="list-item")=question.question_title
+                    p=question.question_body

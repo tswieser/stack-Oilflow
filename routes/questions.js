@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { User, Question, Answer } = require('../db/models');
+const { User, Question, Answer, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
-const { requireAuth } = require('../auth')
+const { requireAuth } = require('../auth');
 
 const questionValidator = [
     check('question_title')
@@ -17,10 +17,26 @@ const questionValidator = [
 ]
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    const questions = await Question.findAll();
+    const questions = await Question.findAll({
+        include: [Answer, Question_like]
+    });
+
+    const question = questions.map(question => {
+        return question.dataValues.Question_likes;
+    })
+
+
+    // const voteCount = question.reduce(vote => {
+    //     if
+
+
+    // })
+
+    // const questionVotes = question.dataValues.Question_likes;
+
 
     res.render('questions', {
-        // title: 'Questions',
+        title: 'Questions',
         questions
     })
 }))
@@ -35,7 +51,6 @@ router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
     const validationErrors = validationResult(req);
-    // console.log(res.locals.user.id, user_id)
 
     if (validationErrors.isEmpty()) {
         await Question.create({
@@ -54,25 +69,16 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
             errors
         });
     }
-
 }))
 
 router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
-<<<<<<< HEAD
     const answers = await Answer.findAll({
         where: {
             question_id: req.params.id
         }
-=======
-
-    res.render('questions-id', {
-        question,
-        title: "Question",
-        csrfToken: req.csrfToken()
->>>>>>> b675e8c6ed4be4176a79bfa10a51bae9e9965086
-    });
+    })
     res.render('questions-id', { answers, question, csrfToken: req.csrfToken() });
 }))
 
