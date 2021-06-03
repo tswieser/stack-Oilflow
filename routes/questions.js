@@ -60,10 +60,18 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
 router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
+<<<<<<< HEAD
     const answers = await Answer.findAll({
         where: {
             question_id: req.params.id
         }
+=======
+
+    res.render('questions-id', {
+        question,
+        title: "Question",
+        csrfToken: req.csrfToken()
+>>>>>>> b675e8c6ed4be4176a79bfa10a51bae9e9965086
     });
     res.render('questions-id', { answers, question, csrfToken: req.csrfToken() });
 }))
