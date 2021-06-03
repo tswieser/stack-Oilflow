@@ -35,7 +35,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     
     console.log(question);
     // const questionVotes = question.dataValues.Question_likes;
-    const questions = await Question.findAll();
+
 
     res.render('questions', {
         title: 'Questions',
