@@ -38,14 +38,16 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
 
 
     res.render('questions', {
-        title: 'Questions',
+        // title: 'Questions',
         questions
     })
 }))
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
-    res.render("ask-question", { title: "Ask Question", csrfToken: req.csrfToken(), })
-
+    res.render("ask-question", {
+        title: "Ask Question",
+        csrfToken: req.csrfToken(),
+    })
 }))
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
