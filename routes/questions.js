@@ -4,6 +4,20 @@ const { User, Question, Answer, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth');
 
+
+let objArr = []
+class QuestionObject {
+    constructor(id, title, body, answers, votes) {
+        this.id = id,
+            this.title = title,
+            this.body = body,
+            this.answers = answers,
+            this.votes = votes
+    }
+}
+
+
+
 const questionValidator = [
     check('question_title')
         .exists({ checkFalsy: true })
@@ -16,29 +30,36 @@ const questionValidator = [
 
 ]
 
+
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     const questions = await Question.findAll({
         include: [Answer, Question_like]
     });
 
-    const question = questions.map(question => {
-        return question.dataValues.Question_likes;
-    })
+    for (let i = 0; i < questions.length; i++) {
+        let question = questions[i]
+        let questionVotes = questions[i].Question_likes;
+        let count = 0
 
+        for (let j = 0; j < questionVotes.length; j++) {
+            let questionLikes = questionVotes[j].question_votes
+            if (questionLikes === true) count++
+            else if (questionLikes === false) count--
+        }
 
-    // const voteCount = question.reduce(vote => {
-    //     if
+        let newQuestion = new QuestionObject(question.id, question.question_title, question.question_body, question.Answers, count)
+        objArr.push(newQuestion)
+    }
 
-
-    // })
-
-    // const questionVotes = question.dataValues.Question_likes;
-
+    //console.log(objArr);
+    //console.log(questions[0].Question_likes[0].question_votes);
+    //console.log(questionLikes[0].question_votes)
 
     res.render('questions', {
-        title: 'Questions',
-        questions
-    })
+        // title: 'Questions',
+      //  questions,
+        objArr
+    });
 }))
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
@@ -80,6 +101,7 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, r
         }
     })
     res.render('questions-id', { answers, question, csrfToken: req.csrfToken() });
+
 }))
 
 
