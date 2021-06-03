@@ -10,10 +10,10 @@ block content
             div.question_div
                 div.stats
                     div.votes_div
-                        p 0
+                        p=question.dataValues.Question_likes
                         p votes
                     div.answers_div
-                        p 0
+                        p=question.dataValues.Answers.length 
                         p answers
                 div.content_div
                     a(href=`/questions/${question.id}`)=question.question_title

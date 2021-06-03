@@ -9,12 +9,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     const columnMapping_answer = {
-      through: "Answer_likes",
+      through: "Answer_like",
       foreignKey: "user_id",
       otherKey: "answer_id"
     }
     const columnMapping_question = {
-      through: "Question_likes",
+      through: "Question_like",
       foreignKey: "user_id",
       otherKey: "question_id"
     }

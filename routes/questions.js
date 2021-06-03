@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { User, Question, Question_like } = require('../db/models');
+const { User, Question, Answer, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
-const { requireAuth } = require('../auth')
+const { requireAuth } = require('../auth');
+
 
 const questionValidator = [
     check('question_title')
@@ -17,13 +18,27 @@ const questionValidator = [
 ]
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    const questions = await Question.findAll({ include: User });
-    console.log(questions);
+    const questions = await Question.findAll({ 
+        include: [ Answer, Question_like ]
+    });
+    
+    const question = questions.map(question => {
+        return question.dataValues.Question_likes;
+    })
+    
+
+    // const voteCount = question.reduce(vote => {
+    //     if
+
+
+    // })
+    
+    console.log(question);
+    // const questionVotes = question.dataValues.Question_likes;
     res.render('questions', {
         title: 'Questions',
         questions
     })
-
 }))
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
@@ -34,7 +49,7 @@ router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
     const validationErrors = validationResult(req);
-    console.log(res.locals.user.id, user_id)
+    // console.log(res.locals.user.id, user_id)
 
     if (validationErrors.isEmpty()) {
         await Question.create({
@@ -53,7 +68,6 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
             errors
         });
     }
-
 }))
 
 
