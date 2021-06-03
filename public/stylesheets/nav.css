@@ -16,7 +16,8 @@ a {
 }
 
 #navbar_about {
-    font-size: 11px;
+    margin: 0px 20px;
+    font-size: 12px;
 }
 
 #navbar_search {
@@ -35,7 +36,6 @@ a {
     border-radius: 3px;
     font-family: inherit;
     max-width: 638px;
-    /* border-radius: none; */
 }
 
 .nav_forms {
