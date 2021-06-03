@@ -20,20 +20,22 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     const questions = await Question.findAll();
 
     res.render('questions', {
-        title: 'Questions',
+        // title: 'Questions',
         questions
     })
 }))
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
-    res.render("ask-question", { title: "Ask Question", csrfToken: req.csrfToken(), })
-
+    res.render("ask-question", {
+        title: "Ask Question",
+        csrfToken: req.csrfToken(),
+    })
 }))
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
     const validationErrors = validationResult(req);
-    console.log(res.locals.user.id, user_id)
+    // console.log(res.locals.user.id, user_id)
 
     if (validationErrors.isEmpty()) {
         await Question.create({
