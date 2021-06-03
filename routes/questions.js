@@ -61,6 +61,7 @@ router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, r
 
     res.render('questions-id', {
         question,
+        title: "Question",
         csrfToken: req.csrfToken()
     });
 }))

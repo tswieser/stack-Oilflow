@@ -21,7 +21,7 @@ router.post('/', csrfProtection, requireAuth, answerValidators, asyncHandler(asy
             answer_body,
             question_id: question.id
         })
-        res.render(`/questions/${question_id}`, { csrfToken: req.csrfToken() });
+        res.render(`/questions/${question_id}`, { csrfToken: req.csrfToken(), title:"Question" });
 
     }
 }))
