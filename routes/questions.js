@@ -4,6 +4,16 @@ const { User, Question, Answer, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth');
 
+class QuestionObject{
+    constructor(id ,title, body, answers, votes){
+        this.title = title,
+        this.body = body,
+        this.answers = answers,
+        this.votes = votes
+    }        
+}
+
+
 
 const questionValidator = [
     check('question_title')
@@ -21,26 +31,19 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     const questions = await Question.findAll({ 
         include: [ Answer, Question_like ]
     });
+
+    const allQuestions = questions.map(question => {
+        return question.dataValues;
+    });
     
-    const question = questions.map(question => {
-        return question.dataValues.Question_likes;
-    })
-    
-
-    // const voteCount = question.reduce(vote => {
-    //     if
-
-
-    // })
-    
-    console.log(question);
-    // const questionVotes = question.dataValues.Question_likes;
-
+    const allLikes = allQuestions.map(question => {
+        return question.Question_likes
+    });
 
     res.render('questions', {
         // title: 'Questions',
         questions
-    })
+    });
 }))
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
