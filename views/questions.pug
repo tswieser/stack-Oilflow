@@ -4,8 +4,8 @@ block content
     div.main_bar
         div.header_div
             h2#questions_title All Questions
-            a(href="/questions/ask" class= "blue_btn") Ask Question
-
+            a(href="/questions/ask" class="blue_btn") Ask Question
+    if questionsArr
         each question in questionsArr
             div.question_div
                 div.stats

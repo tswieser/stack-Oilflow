@@ -20,3 +20,27 @@ block content
         label(for="answer_body")
         textarea(name="answer_body", cols="30", rows="10")
         button(type="submit") Post Your Answer
+    script(src="/javascripts/answer-ajax.js" type="module")
+block content
+    div(id='grid-container')
+        p(id='q-title')=question.question_title
+        p(id='q-body')=question.question_body
+        //- p(id='q-id')=question.id
+        //- script=console.log(`THIS IS ID`,question.id)
+        div(id="answer-container") Answers
+            if answers
+                each answer in answers
+                    div(id='q-answers')
+                        p=answer.answer_body
+        div(id="your-answer")
+            form(id="answer-form")
+                input(type="hidden" name="_csrf" value=csrfToken id="_csrf")
+                p(id="your-ans") Your Answer
+                label(for="answer_body")
+                textarea(name="answer_body" cols="92" rows="15" tabindex="101" id="textArea")
+                button(type="submit" id="submit-answer") Post Your Answer
+        //- div(id="side-nav")
+        //-         <a href="/">Home</a>
+        //-         p Public
+        //-         <a href="#">Link 2</a>
+

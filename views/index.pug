@@ -3,20 +3,21 @@ extends layout
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="../stylesheets/index.css")
-  link(rel="stylesheet" href="../public/stylesheets/nav.css")
   link(rel="stylesheet" href="../stylesheets/questions.css")
   link(rel="stylesheet" href="../stylesheets/nav.css")
+  link(rel="stylesheet" href="../stylesheets/question-id.css")
+
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
   div
     nav(id="nav_bar")
-      div(id="navbar_links" class="inactive")
-        a(href="http://") Questions
-        a(href="http://") Tags
-        a(href="http://") Profile
-      div
-        a(href="/" class="Logo" id="logo_letters" )
+      //- div(id="navbar_links" class="inactive")
+      //-   a(href="http://") Questions
+      //-   a(href="http://") Tags
+      //-   a(href="http://") Profile
+      div(id="home-pagelogo")
+        a(href="/" class="Logo" id="logo_img" )
         a(href="/" id="navbar_homepage") Stack Oil Flow
         a(href="/about" id="navbar_about") About
       input(type="text" placeholder="Search..." id="navbar_search" img)

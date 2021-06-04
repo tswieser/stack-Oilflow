@@ -26,7 +26,7 @@ const questionValidator = [
         .withMessage("Title can not be greater than 200 characters"),
     check('question_body')
         .exists({ checkFalsy: true })
-        .withMessage("PLease enter your question")
+        .withMessage("Please enter your question")
 
 ]
 
@@ -56,9 +56,9 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     //console.log(questionLikes[0].question_votes)
 
     res.render('questions', {
-        // title: 'Questions',
-      //  questions,
-      questionsArr
+        title: 'Questions',
+        questions,
+        questionsArr
     });
 }))
 
@@ -72,7 +72,6 @@ router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
     const { question_title, question_body, user_id } = req.body;
     const validationErrors = validationResult(req);
-    // console.log(res.locals.user.id, user_id)
 
     if (validationErrors.isEmpty()) {
         await Question.create({
@@ -94,14 +93,15 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
 }))
 
 router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+    console.log(`POST QUESTION `)
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
-
-    res.render('questions-id', {
-        question,
-        title: "Question",
-        csrfToken: req.csrfToken()
-    });
+    const answers = await Answer.findAll({
+        where: {
+            question_id: req.params.id
+        }
+    })
+    res.render('questions-id', { answers, question, csrfToken: req.csrfToken() });
 }))
 
 
