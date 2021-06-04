@@ -7,11 +7,11 @@
    display: flex;
    justify-content: space-between;
    border-bottom:1px solid lightgrey;
-  padding: 20px;
+    padding: 20px;
 }
 
 .question_div{
-    display : flex;
+    display: flex;
     border-bottom:1px solid lightgrey;
     padding-bottom: 30px;
 }

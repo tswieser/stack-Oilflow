@@ -56,9 +56,9 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     //console.log(questionLikes[0].question_votes)
 
     res.render('questions', {
-        // title: 'Questions',
-        //  questions,
-        objArr
+        title: 'Questions',
+        questions,
+        questionsArr
     });
 }))
 

@@ -24,6 +24,8 @@ a {
 }
 #logo_img {
     background-image: url('../images/3oillogo.jpeg');
+    background-size: 33px;
+    background-repeat: no-repeat;
     width: 35px;
     height: 35px;
 }
