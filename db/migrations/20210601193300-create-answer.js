@@ -10,7 +10,7 @@ module.exports = {
       },
       answer_body: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       user_id: {
         allowNull: false,
@@ -19,7 +19,7 @@ module.exports = {
       },
       question_id: {
         allowNull: false,
-        references: {model: "Questions"},
+        references: { model: "Questions" },
         type: Sequelize.INTEGER
       },
       createdAt: {

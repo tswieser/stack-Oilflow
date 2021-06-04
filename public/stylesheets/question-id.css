@@ -2,14 +2,27 @@
     display: grid;
     grid-template-areas:
     "sidebar title right"
-    ". body .";
-}
-
-#q-answers {
-    grid-area: main;
-    /* background-color: red; */
+    ". body ."
+    ". answer ."
+    ". form .";
     grid-template-columns: 25% 50% 25%;
     grid-template-rows: auto;
+}
+
+#side-nav {
+    grid-area: sidebar;
+    padding-left: 35%;
+}
+
+#answer-container {
+    grid-area: answer;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 1.46rem;
+    color: rgb(36, 39, 41);
+}
+#q-answers{
+    border-top: 1px solid #bbc0c4;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;
 }
 
 #q-title {
@@ -21,6 +34,40 @@
     font-size: 2rem;
     border-bottom: 1px solid #e4e6e8;
 }
-#q-body, {
+#q-body{
      grid-area: body;
+     text-align: left;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;
+
+}
+
+#q-id {
+    grid-area: title;
+    margin: 5px;
+    position: relative;
+}
+#your-answer {
+    grid-area: form
+}
+#your-ans{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 1.46rem;
+    color: rgb(36, 39, 41);
+}
+
+#submit-answer{
+       font-size: 13px;
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid ;
+    display: inline-block;
+    color: white;
+    background-color: #0095FF;
+    padding: .8em;
+    margin: 2px;
+    height: 35.2px
+}
+
+#submit-answer:hover{
+    background-color: #0576c7;
 }

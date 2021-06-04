@@ -57,7 +57,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
 
     res.render('questions', {
         // title: 'Questions',
-      //  questions,
+        //  questions,
         objArr
     });
 }))
@@ -92,7 +92,8 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
     }
 }))
 
-router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+    console.log(`POST QUESTION `)
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
     const answers = await Answer.findAll({

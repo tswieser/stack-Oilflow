@@ -10,24 +10,29 @@ const answerValidators = [
         .exists({ checkFalsy: true })
         .withMessage("Answer cannot be empty.")
 ];
-router.post('/:id', csrfProtection, requireAuth, answerValidators, asyncHandler(async (req, res, next) => {
-    const { answer_body } = req.body;
+
+
+
+
+router.post('/', csrfProtection, requireAuth, answerValidators, asyncHandler(async (req, res, next) => {
+
+    const { answer_body, question_id } = req.body;
     const validationErrors = validationResult(req)
-    const question = await Question.findByPk(req.params.id)
-    // id = question
+    const question = await Question.findByPk(question_id)
+
     const answers = await Answer.findAll({
         where: {
-            question_id: req.params.id
+            question_id: question_id
         }
     }); //hits this route in backend
 
     if (validationErrors.isEmpty()) {
-        await Answer.create({
+        const createAns = await Answer.create({
             question_id: question.id,
             user_id: res.locals.user.id,
             answer_body
         })
-        res.render(`questions-id`, { answers, question, csrfToken: req.csrfToken() });
+        res.json({ createAns });
     } else {
         const errors = validationErrors.array().map((error) => {
             return error.msg;
