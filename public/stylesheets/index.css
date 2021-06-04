@@ -19,7 +19,6 @@ h1 {
     align-items: center;
     align-content: space-around;
     justify-content: center;
-    margin:50px 50px 0px 0px ;
 }
 
 .form_container a {
@@ -27,6 +26,7 @@ h1 {
 }
 
 .signup{
+    margin-top: 50px;
     display:flex;
     flex-direction:column;
 	width: 300px;
