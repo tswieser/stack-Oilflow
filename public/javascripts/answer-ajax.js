@@ -1,12 +1,5 @@
 //add event listener to the form submit btn
 //prevent default inside of event listener
-<<<<<<< HEAD
-=======
-
-// const { response } = require("express");
-
-
->>>>>>> origin/answersapi
 // start with fetch submit answer
 //await the fetch (submit req with method post)
 //post will hit backend server( set route )
