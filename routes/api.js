@@ -10,17 +10,17 @@ const questionVoteCounter = async function(questionId){
         include:  Question_like
     });
     let questionVotes = question.Question_likes;
+
     let count = 0
     
     for (let j = 0; j < questionVotes.length; j++) {
         let questionLikes = questionVotes[j].question_votes
-        console.log(count);
         if (questionLikes === true){
             count++
-        }
+        } 
         else if (questionLikes === false){
             count--
-        } 
+        }
     }
     return count;
 }
@@ -29,7 +29,6 @@ apiRouter.post("/questions/:id(\\d+)/upvote", async(req, res) => {
 
     const userId = req.session.auth.userId;
     const questionId = parseInt(req.params.id, 10);
-
 
     await Question_like.create({
         question_id: questionId,
@@ -53,6 +52,59 @@ apiRouter.post("/questions/:id(\\d+)/downvote", async(req, res) => {
     })
 
     let voteCount = await questionVoteCounter(questionId);
+    res.json({voteCount})
+});
+
+
+//ANSWER LIKES API
+
+const answerVoteCounter = async function(answerId){
+    const answer = await Question.findByPk(answerId, {
+        include:  Answer_like
+    });
+    let answerVotes = answer.Answer_likes;
+
+    let count = 0
+    
+    for (let j = 0; j < answerVotes.length; j++) {
+        let answerLikes = answerVotes[j].answer_votes
+        if (questionLikes === true){
+            count++
+        } 
+        else if (questionLikes === false){
+            count--
+        }
+    }
+    return count;
+}
+
+apiRouter.post("/answers/:id(\\d+)/upvote", async(req, res) => {
+
+    const userId = req.session.auth.userId;
+    const answerId = parseInt(req.params.id, 10);
+
+    await Answer_like.create({
+        answer_id: answerId,
+        answer_votes: 1,
+        user_id: userId
+    })
+
+    let voteCount = await questionVoteCounter(answerId);
+    res.json({voteCount})
+});
+  
+apiRouter.post("/answers/:id(\\d+)/downvote", async(req, res) => {
+
+    const userId = req.session.auth.userId;
+    const answerId = parseInt(req.params.id, 10);
+
+    await Answer_like.create({
+        answer_id: answerId,
+        answer_votes: 0,
+        user_id: userId
+    })
+
+    let voteCount = await questionVoteCounter(answerId);
     res.json({voteCount})
 });
 

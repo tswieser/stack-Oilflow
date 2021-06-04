@@ -5,18 +5,25 @@ const { csrfProtection, asyncHandler, check, validationResult } = require('./uti
 const { requireAuth } = require('../auth');
 
 
-let questionsArr = []
+
 class QuestionObject {
     constructor(id, title, body, answers, votes) {
         this.id = id,
-            this.title = title,
-            this.body = body,
-            this.answers = answers,
-            this.votes = votes
+        this.title = title,
+        this.body = body,
+        this.answers = answers,
+        this.votes = votes
     }
 }
 
-
+class AnswerObject {
+    constructor(id, answer_body, user_id, votes) {
+        this.id = id,
+        this.body = answer_body,
+        this.userId = user_id,
+        this.votes = votes
+    }
+}
 
 const questionValidator = [
     check('question_title')
@@ -32,6 +39,7 @@ const questionValidator = [
 
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
+    let questionsArr = []
     const questions = await Question.findAll({
         include: [Answer, Question_like]
     });
@@ -93,7 +101,30 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
 }))
 
 router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
-    console.log(`POST QUESTION `)
+    let answersArr = []
+
+
+    const answers = await Answer.findAll({
+        include: [Answer_like]
+    });
+
+    for (let i = 0; i < answers.length; i++) {
+        let answer = answers[i]
+        let answerVotes = answers[i].Answer_likes;
+        let count = 0
+
+        for (let j = 0; j < questionVotes.length; j++) {
+            let questionLikes = questionVotes[j].question_votes
+            if (questionLikes === true) count++
+            else if (questionLikes === false) count--
+        }
+
+        let newQuestion = new QuestionObject(question.id, question.question_title, question.question_body, question.Answers, count)
+        questionsArr.push(newQuestion)
+    }
+
+
+
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
     const answers = await Answer.findAll({
@@ -101,9 +132,8 @@ router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) =>
             question_id: req.params.id
         }
     })
-    res.render('questions-id', { answers, question, csrfToken: req.csrfToken() });
+    res.render('questions-id', {  answers, question, csrfToken: req.csrfToken() });
 }))
-
 
 
 module.exports = router;

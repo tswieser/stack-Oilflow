@@ -1,37 +1,24 @@
 extends index
 append head
-    script(src="/javascripts/question_votes.js" type="module") 
-block content
-
-    h1=question.question_title
-    p=question.question_body
-    p( class= "question_id" id=question.id)
-    button(id="question_upvote") upvote 
-    button(id="question_downvote") downvote 
-
-    if answers
-        each answer in answers
-            div
-                p=answer.answer_body
-
-    form(action=`/questions/` method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        h2 Your Answer
-        label(for="answer_body")
-        textarea(name="answer_body", cols="30", rows="10")
-        button(type="submit") Post Your Answer
+    script(src="/javascripts/question_votes.js" type="module")
+    script(src="/javascripts/answer_votes.js" type="module")
     script(src="/javascripts/answer-ajax.js" type="module")
 block content
+    p(class= "question_id" id=question.id)
     div(id='grid-container')
-        p(id='q-title')=question.question_title
-        p(id='q-body')=question.question_body
+    p(id='q-title')=question.question_title
+    p(id='q-body')=question.question_body
+        button(id="question_upvote") upvote 
+        button(id="question_downvote") downvote
         //- p(id='q-id')=question.id
         //- script=console.log(`THIS IS ID`,question.id)
         div(id="answer-container") Answers
             if answers
                 each answer in answers
-                    div(id='q-answers')
+                    div(id=`q_answers_${answer.id}`)
                         p=answer.answer_body
+                            button(class="up_vote" id=`${answer.id}`) upvote 
+                            button(class="down_vote" id=`${answer.id}`) downvote
         div(id="your-answer")
             form(id="answer-form")
                 input(type="hidden" name="_csrf" value=csrfToken id="_csrf")
@@ -43,4 +30,3 @@ block content
         //-         <a href="/">Home</a>
         //-         p Public
         //-         <a href="#">Link 2</a>
-
