@@ -29,6 +29,8 @@ a {
 }
 
 #navbar_about {
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
     margin-top: 6px;
     margin-left: 15px;
@@ -39,6 +41,8 @@ a {
 }
 
 #navbar_homepage {
+    display: flex;
+   align-items: center;
     box-sizing: border-box;
     box-sizing: border-box;
     font-weight: 1000;
@@ -102,6 +106,7 @@ a {
     height: 35.2px;
     top:3px;
     font-size: 13px;
+    text-align: center;
 }
 #login-nav:hover {
     background-color: #c6dcec;

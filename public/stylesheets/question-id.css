@@ -26,6 +26,7 @@
 }
 
 #q-title {
+    padding-top: 35px;
     grid-area: title;
     color: #3c4146;
     display: flex;
