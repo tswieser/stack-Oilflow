@@ -5,7 +5,7 @@ const { csrfProtection, asyncHandler, check, validationResult } = require('./uti
 const { requireAuth } = require('../auth');
 
 
-let objArr = []
+let questionsArr = []
 class QuestionObject {
     constructor(id, title, body, answers, votes) {
         this.id = id,
@@ -48,7 +48,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
         }
 
         let newQuestion = new QuestionObject(question.id, question.question_title, question.question_body, question.Answers, count)
-        objArr.push(newQuestion)
+        questionsArr.push(newQuestion)
     }
 
     //console.log(objArr);
@@ -58,7 +58,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     res.render('questions', {
         // title: 'Questions',
       //  questions,
-        objArr
+      questionsArr
     });
 }))
 
@@ -93,20 +93,9 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
     }
 }))
 
-router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
-
-    router.get('/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
-        const questionsId = parseInt(req.params.id, 10)
-        const question = await Question.findByPk(questionsId)
-
-        res.render('question-id', {
-            title: 'Question',
-            question,
-            csrfToken: req.csrfToken()
-        });
-    }))
 
     res.render('questions-id', {
         question,

@@ -5,18 +5,50 @@ const { csrfProtection, asyncHandler, check, validationResult } = require('./uti
 const { requireAuth } = require('../auth')
 
 
+const questionVoteCounter = async function(questionId){
+    const question = await Question.findByPk(questionId, {
+        include:  Question_like
+    });
+    let questionVotes = question.Question_likes;
+    let count = 0
 
-apiRouter.post("/questions/:id(\\d+)/upvote", (req, res) => {
+    for (let j = 0; j < questionVotes.length; j++) {
+        let questionLikes = questionVotes[j].question_votes
+        if (questionLikes === true) count++
+        else if (questionLikes === false) count--
+    }
+    return count;
+}
 
-    const userId = req.session.userId;
+apiRouter.post("/questions/:id(\\d+)/upvote", async(req, res) => {
 
-    const userVote = await Question_like.findAll({
-        where: {user_id : userId}
+    const userId = req.session.auth.userId;
+    const questionId = parseInt(req.params.id, 10);
+
+    await Question_like.create({
+        question_id: questionId,
+        question_vote: true,
+        user_id: userId
     })
 
-
+    let voteCount = questionVoteCounter(questionId);
+    res.json({voteCount})
 });
   
-apiRouter.post("/questions/:id(\\d+)/downvote", (req, res) => {
- 
+apiRouter.post("/questions/:id(\\d+)/downvote", async(req, res) => {
+
+    const userId = req.session.auth.userId;
+    const questionId = parseInt(req.params.id, 10);
+
+    await Question_like.create({
+        question_id: questionId,
+        question_vote: false,
+        user_id: userId
+    })
+
+    let voteCount = questionVoteCounter(questionId);
+    res.json({voteCount})
 });
+
+
+module.exports = apiRouter

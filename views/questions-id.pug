@@ -1,12 +1,13 @@
 extends index
-
+append head
+    script(src="/javascripts/question_votes.js" type="module") 
 block content
 
     h1=question.question_title
     p=question.question_body
-    p=question.id
-
-        script=console.log(question.id)
+    p( class= "question_id" id=question.id)
+    button(id="question_upvote") upvote 
+    button(id="question_downvote") downvote 
 
     if answers
         each answer in answers
@@ -19,4 +20,3 @@ block content
         label(for="answer_body")
         textarea(name="answer_body", cols="30", rows="10")
         button(type="submit") Post Your Answer
-
