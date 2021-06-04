@@ -26,7 +26,7 @@ h1 {
 }
 
 .signup{
-    margin-top: 50px;
+ margin-top: 110px;
     display:flex;
     flex-direction:column;
 	width: 300px;
@@ -66,4 +66,7 @@ h1 {
 .signup_btn:hover{
     background-color:#066bb3;
 }
+
+
+
 

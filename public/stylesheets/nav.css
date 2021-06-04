@@ -97,10 +97,11 @@ a {
 #login-nav {
     position: relative;
     box-sizing: border-box;
-    width: 70px;
+    width: 60px;
     border-radius: 3px;
     border: 1px solid #1a4768;
     font-size: 13px;
+    margin-right: 5px;
     /* display: inline-block; */
     color: #39739D;
     background-color: #e1ecf4;
@@ -117,11 +118,10 @@ a {
 #signup-nav{
     position: relative;
     box-sizing: border-box;
-    width: 70px;
+    width: 67px;
     border-radius: 3px;
     border: 1px solid #04365a;
     font-size: 13px;
-    /* display: inline-block; */
     color: white;
     background-color: #0095FF;
     padding: .8em;
