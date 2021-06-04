@@ -22,8 +22,10 @@ a {
     display: flex;
     width: 350px;
 }
-#logo_letters {
+#logo_img {
     background-image: url('../images/3oillogo.jpeg');
+    width: 35px;
+    height: 35px;
 }
 
 #navbar_about {
@@ -60,15 +62,23 @@ a {
     max-width: 638px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1020px) {
     #navbar_search {
         width: 70%;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
+    #navbar_search {
+        width:65%;
+    }
+}
+@media (max-width: 670px) {
     #navbar_search {
         width: 40%;
     }
+    /* #navbar_homepage {
+
+    } */
 }
 
 .nav_forms {
