@@ -4,30 +4,39 @@
     justify-content: center;
     align-items: center;
     height: 47px;
+    width: 100%;
     font-size: 13px;
     font-weight: 400;
     box-shadow: 0px;
     border-top: 3px solid #F78222;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+    position: fixed;
 }
 
 a {
     text-decoration: none;
 }
 
+#home-pagelogo {
+    box-sizing: content-box;
+    display: flex;
+    width: 400px;
+}
 #logo_letters {
-    margin-left: 30px;
     background-image: url('../images/3oillogo.jpeg');
 }
 
 #navbar_about {
+    margin-top: 6px;
     margin-left: 30px;
     margin-right: 30px;
     font-size: 12px;
     color: rgb(110, 109, 109);
+    box-sizing: border-box;
 }
 
 #navbar_homepage {
+    box-sizing: border-box;
     font-weight: 1000;
 }
 
@@ -49,39 +58,53 @@ a {
     max-width: 638px;
 }
 
+@media (max-width: 800px) {
+    #navbar_search {
+        width: 100px;
+    }
+}
+
 .nav_forms {
-    margin-left: 30px;
-    padding-right: 130px;
+    margin-left: 10px;
+    /* padding-right: 130px; */
+    display: flex;
+    width: 170px;
 }
 
 #login-nav {
     position: relative;
+    box-sizing: border-box;
+    width: 70px;
     border-radius: 3px;
-    border: 1px solid ;
-    display: inline-block;
-    color: #39739D;
+    border: 1px solid #1a4768;
     font-size: 13px;
+    /* display: inline-block; */
+    color: #39739D;
     background-color: #e1ecf4;
     padding: .8em;
-    margin-right: 4px;
     height: 35.2px;
-    justify-content: center;
+    top:3px;
+    font-size: 13px;
 }
 #login-nav:hover {
     background-color: #c6dcec;
 }
 
 #signup-nav{
-    font-size: 13px;
     position: relative;
+    box-sizing: border-box;
+    width: 70px;
     border-radius: 3px;
-    border: 1px solid ;
-    display: inline-block;
+    border: 1px solid #04365a;
+    font-size: 13px;
+    /* display: inline-block; */
     color: white;
     background-color: #0095FF;
     padding: .8em;
     margin: 2px;
-    height: 35.2px
+    height: 35.2px;
+    top:1px;
+    font-size: 13px;
 }
 #signup-nav:hover {
     background-color: #0576c7;
