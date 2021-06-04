@@ -21,6 +21,6 @@
     font-size: 2rem;
     border-bottom: 1px solid #e4e6e8;
 }
-#q-body, {
+#q-body {
      grid-area: body;
 }
