@@ -5,7 +5,7 @@ const { csrfProtection, asyncHandler, check, validationResult } = require('./uti
 const { requireAuth } = require('../auth');
 
 
-let objArr = []
+let questionsArr = []
 class QuestionObject {
     constructor(id, title, body, answers, votes) {
         this.id = id,
@@ -48,7 +48,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
         }
 
         let newQuestion = new QuestionObject(question.id, question.question_title, question.question_body, question.Answers, count)
-        objArr.push(newQuestion)
+        questionsArr.push(newQuestion)
     }
 
     //console.log(objArr);
@@ -56,9 +56,8 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     //console.log(questionLikes[0].question_votes)
 
     res.render('questions', {
-        // title: 'Questions',
-      //  questions,
-        objArr
+        title: 'Questions',
+        objArr: questionsArr
     });
 }))
 
