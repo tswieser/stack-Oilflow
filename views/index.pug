@@ -23,7 +23,17 @@ append head
         a(href="/questions" id="navbar_about") Questions
       input(type="text" placeholder="Search..." id="navbar_search" img)
       div(class="nav_forms")
-        a(href="/users/login" class="" id="login-nav") Log in
-        a(href="/users/new" class="" id="signup-nav") Sign up
+        a(href="/users/login" id="login-nav") Log in
+        a(href="/users/new" id="signup-nav") Sign up
 block content
-  div(class="img-container")
+  div(class="main-grid-container")
+    div.main-content
+      div.bubbles
+        div.beige
+          <img src="../images/front-loupe.png" alt="loupe" class="loupe-img">
+          p(class='beige-txt') Find the best answer to your automotive question, help others answer theirs
+          a(href="/questions/" class="home-links") Browse our questions
+        div.blue
+          <img src="../images/padlock.png" alt="loupe" class="padlock-img">
+          p(class='blue-txt') A secure place where you can interact with other members of the car community
+          a(href="/users/new" class="home-links2") Join our community

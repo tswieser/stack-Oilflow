@@ -89,20 +89,20 @@ a {
 
 .nav_forms {
     margin-left: 10px;
-    /* padding-right: 130px; */
+
     display: flex;
     width: 170px;
 }
 
 #login-nav {
-    position: relative;
+    /* NO NEED FOR POS RELATIVE HERE
+TOOK IT OUT FOR BETTER ALIGNMENT */
     box-sizing: border-box;
     width: 60px;
     border-radius: 3px;
     border: 1px solid #1a4768;
     font-size: 13px;
     margin-right: 5px;
-    /* display: inline-block; */
     color: #39739D;
     background-color: #e1ecf4;
     padding: .8em;
@@ -116,7 +116,8 @@ a {
 }
 
 #signup-nav{
-    position: relative;
+/* NO NEED FOR POS RELATIVE HERE
+TOOK IT OUT FOR BETTER ALIGNMENT */
     box-sizing: border-box;
     width: 67px;
     border-radius: 3px;
@@ -125,7 +126,6 @@ a {
     color: white;
     background-color: #0095FF;
     padding: .8em;
-    margin: 2px;
     height: 35.2px;
     top:1px;
     font-size: 13px;

@@ -65,15 +65,94 @@ h1 {
 
 .signup_btn:hover{
     background-color:#066bb3;
+     transition: background .1s ease-in-out;
 }
 
-.img-container {
-    background-image: url('../images/background.PNG');
+.main-grid-container {
+    /* background-image: url('../images/background.PNG');
     background-size: 100%;
-    margin-top: 60px;
-    width: 100%;
-    height: 600px;
     background-repeat: no-repeat;
     position: absolute;
-    z-index: -1;
+    z-index: -1; */
+    display: grid;
+    padding-top: 100px;
+    grid-template-areas: "ls main rs";
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 5% 90% 5%;
+    /* width: 100%;
+    height: 600px;
+    background-color: blue; */
+}
+
+.main-content{
+    background-color: #34383B;
+    background-image: linear-gradient(#25282A, #44494E);
+    grid-area: main;
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+}
+.bubbles{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.beige, .blue{
+    width: 444px;
+    height: 250px;
+    z-index: 1;
+    border-radius: 7px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.beige {
+    background-color: #fee3cf;
+}
+.blue{
+    background-color: #cfeafe;
+}
+.beige-txt, .blue-txt {
+    font-family: "Source Sans Pro", sans-serif;
+    line-height: 24.7px;
+    font-size: 17.5px;
+    margin-bottom: 17px;
+    color: #242729;
+    width: 350px;
+    height: 48px;
+    text-align: center;
+}
+.loupe-img, .padlock-img{
+    margin-top: 5px;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+}
+.home-links, .home-links2 {
+    border: 1px solid rgb(187, 187, 187);
+    padding: 15px;
+    border-radius: 4px;
+    color: white;
+    width: 210px;
+    height: 45px;
+    text-align: center;
+}
+
+.home-links {
+ background-color: #F2720C;
+}
+.home-links:hover{
+ background-color: #DA670B;
+ transition: background .1s ease-in-out;
+}
+.home-links2{
+ background-color: #2ca2f7;
+}
+.home-links2:hover {
+  background-color:  #0077CC;
+  transition: background .1s ease-in-out;
+
 }
