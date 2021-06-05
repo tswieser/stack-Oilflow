@@ -6,12 +6,10 @@ const { asyncHandler } = require('./utils');
 
 
 router.get("/",  asyncHandler(async(req, res, next) => {
-    const { searchvalue } = req.body
-    // console.log(req.body)
-    let questions = await Question.findAll({
-        where: {  }
-    })
-    req.render("searched-question")
+    const questions = await Question.findAll()
+
+    res.json({ questions })
+
 }));
 
 
