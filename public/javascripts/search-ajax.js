@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", ()=> {
 
     const searchbar = document.getElementById("navbar_search");
-
+    const qContainer = document.getElementById("question-container")
     searchbar.addEventListener("keypress", async(e) => {
-
         const res = await fetch("/search")
         const result = await res.json();
         // console.log(result.questions)
@@ -12,7 +11,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
         })
         if (e.key === "Enter") {
             if (filtered) {
-                window.location.replace("/questions")
+                // window.location.replace("/questions")
+                console.log(qContainer)
+                qContainer.innerHTML = "";
+                // qContainer.innerHTML =
             }
         }
 
