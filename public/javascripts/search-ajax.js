@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     const searchbar = document.getElementById("navbar_search");
 
-    searchbar.addEventListener("keyup", async(e) => {
+    searchbar.addEventListener("keypress", async(e) => {
 
         const res = await fetch("/search")
         const result = await res.json();
@@ -10,8 +10,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
         const filtered = result.questions.filter(obj => {
            return obj.question_title.toLowerCase().includes(e.target.value.toLowerCase())
         })
-        // console.log(filtered)
-        if (filtered)
+        if (e.key === "Enter") {
+            if (filtered) {
+                window.location.replace("/questions")
+            }
+        }
 
     })
 
