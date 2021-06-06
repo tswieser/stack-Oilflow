@@ -1,6 +1,6 @@
 const express = require("express");
 const apiRouter = express.Router();
-const { Question_like, User, Question } = require('../db/models');
+const { Answer_like, Question_like, Answer, Question } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth')
 
@@ -25,7 +25,7 @@ const questionVoteCounter = async function(questionId){
     return count;
 }
 
-apiRouter.post("/questions/:id(\\d+)/upvote", async(req, res) => {
+apiRouter.post("/questions/:id(\\d+)/upvote", asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const questionId = parseInt(req.params.id, 10);
@@ -38,9 +38,9 @@ apiRouter.post("/questions/:id(\\d+)/upvote", async(req, res) => {
 
     let voteCount = await questionVoteCounter(questionId);
     res.json({voteCount})
-});
+}));
   
-apiRouter.post("/questions/:id(\\d+)/downvote", async(req, res) => {
+apiRouter.post("/questions/:id(\\d+)/downvote", asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const questionId = parseInt(req.params.id, 10);
@@ -53,32 +53,33 @@ apiRouter.post("/questions/:id(\\d+)/downvote", async(req, res) => {
 
     let voteCount = await questionVoteCounter(questionId);
     res.json({voteCount})
-});
+}));
 
 
 //ANSWER LIKES API
 
 const answerVoteCounter = async function(answerId){
-    const answer = await Question.findByPk(answerId, {
+    const answer = await Answer.findByPk(answerId, {
         include:  Answer_like
     });
     let answerVotes = answer.Answer_likes;
-
+    
     let count = 0
     
     for (let j = 0; j < answerVotes.length; j++) {
         let answerLikes = answerVotes[j].answer_votes
-        if (questionLikes === true){
+        if (answerLikes === true){
             count++
         } 
-        else if (questionLikes === false){
+        else if (answerLikes === false){
             count--
         }
     }
+    console.log(count);
     return count;
 }
 
-apiRouter.post("/answers/:id(\\d+)/upvote", async(req, res) => {
+apiRouter.post(`/answers/:id(\\d+)/upvote`, asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const answerId = parseInt(req.params.id, 10);
@@ -89,11 +90,11 @@ apiRouter.post("/answers/:id(\\d+)/upvote", async(req, res) => {
         user_id: userId
     })
 
-    let voteCount = await questionVoteCounter(answerId);
+    let voteCount = await answerVoteCounter(answerId);
     res.json({voteCount})
-});
+}));
   
-apiRouter.post("/answers/:id(\\d+)/downvote", async(req, res) => {
+apiRouter.post(`/answers/:id(\\d+)/downvote`, asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const answerId = parseInt(req.params.id, 10);
@@ -104,9 +105,9 @@ apiRouter.post("/answers/:id(\\d+)/downvote", async(req, res) => {
         user_id: userId
     })
 
-    let voteCount = await questionVoteCounter(answerId);
+    let voteCount = await answerVoteCounter(answerId);
     res.json({voteCount})
-});
+}));
 
 
 module.exports = apiRouter

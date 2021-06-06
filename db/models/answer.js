@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Answer.belongsTo(models.Question, { foreignKey: "question_id" });
     Answer.belongsToMany(models.User, columnMapping);
-    Answer.hasMany(models.Answer_like, {foreignKey:  "answer_id"})
+    Answer.hasMany(models.Answer_like, {foreignKey: "answer_id"})
   };
   return Answer;
 };

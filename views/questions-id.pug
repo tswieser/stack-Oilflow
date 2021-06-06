@@ -13,12 +13,13 @@ block content
         //- p(id='q-id')=question.id
         //- script=console.log(`THIS IS ID`,question.id)
         div(id="answer-container") Answers
-            if answers
-                each answer in answers
+            if answersArr
+                each answer in answersArr
                     div(id=`q_answers_${answer.id}`)
-                        p=answer.answer_body
-                            button(class="up_vote" id=`${answer.id}`) upvote 
-                            button(class="down_vote" id=`${answer.id}`) downvote
+                        p=answer.body
+                            div(class=`answer_vote_${answer.id}`)=answer.votes
+                                button(class="answer_upvote" id=`${answer.id}`) upvote 
+                                button(class="answer_downvote" id=`${answer.id}`) downvote
         div(id="your-answer")
             form(id="answer-form")
                 input(type="hidden" name="_csrf" value=csrfToken id="_csrf")

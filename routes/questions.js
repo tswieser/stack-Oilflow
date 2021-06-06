@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, Question, Answer, Question_like } = require('../db/models');
+const { Answer_like, Question, Answer, Question_like } = require('../db/models');
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth');
 
@@ -101,38 +101,33 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
 }))
 
 router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
-    // let answersArr = []
-
-
-    // const answers = await Answer.findAll({
-    //     include: [Question, Answer_like]
-    // });
-
-    // for (let i = 0; i < answers.length; i++) {
-    //     let answer = answers[i]
-    //     let answerVotes = answers[i].Answer_likes;
-    //     let count = 0
-
-    //     for (let j = 0; j < answerVotes.length; j++) {
-    //         let answerLikes = answerVotes[j].answerVotes
-    //         if (answerLikes === true) count++
-    //         else if (answerLikes === false) count--
-    //     }
-
-    //     let newAnswer = new AnswerObject(answer.id, answer.answer_body, answer.user_id, count)
-    //     answersArr.push(newAnswer)
-    // }
-
-    // console.log(answersArr);
-
+    let answersArr = []
+    
     const questionsId = parseInt(req.params.id, 10)
     const question = await Question.findByPk(questionsId)
     const answers = await Answer.findAll({
         where: {
             question_id: req.params.id
-        }
+        },
+        include: [Question, Answer_like]
     })
-    res.render('questions-id', {  answers, question, csrfToken: req.csrfToken() });
+    
+    for (let i = 0; i < answers.length; i++) {
+        let answer = answers[i]
+        let answerVotes = answers[i].Answer_likes;
+        let count = 0
+        
+        for (let j = 0; j < answerVotes.length; j++) {
+            let answerLikes = answerVotes[j].answer_votes
+            if (answerLikes === true) count++
+            else if (answerLikes === false) count--
+        }
+        
+        let newAnswer = new AnswerObject(answer.id, answer.answer_body, answer.user_id, count)
+        answersArr.push(newAnswer)
+    }
+    
+    res.render('questions-id', { answersArr, question, csrfToken: req.csrfToken() });
 }))
 
 
