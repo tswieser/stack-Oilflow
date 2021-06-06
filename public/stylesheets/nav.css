@@ -113,6 +113,25 @@ a {
 #login-nav:hover {
     background-color: #c6dcec;
 }
+#logout-nav {
+    position: relative;
+    box-sizing: border-box;
+    width: 70px;
+    border-radius: 3px;
+    border: 1px solid #1a4768;
+    font-size: 13px;
+    /* display: inline-block; */
+    color: #39739D;
+    background-color: #e1ecf4;
+    padding: .8em;
+    height: 35.2px;
+    top:3px;
+    font-size: 13px;
+    text-align: center;
+}
+#logout-nav:hover {
+    background-color: #c6dcec;
+}
 
 #signup-nav{
     position: relative;

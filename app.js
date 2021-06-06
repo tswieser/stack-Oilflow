@@ -9,6 +9,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
 const questionsRouter = require('./routes/questions');
 const answerRouter = require('./routes/post-answer');
 const searchRouter = require('./routes/search');
@@ -44,6 +45,7 @@ store.sync();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/users/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/questions', questionsRouter);
 app.use('/answers', answerRouter);
 app.use('/search', searchRouter)
