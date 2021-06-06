@@ -275,3 +275,9 @@ h1 {
     opacity: 0.25;
     margin-left: 18px;
 }
+
+.not-found {
+    display: flexbox;
+    /* align-items: center;
+    justify-content: center; */
+}
