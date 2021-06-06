@@ -12,11 +12,9 @@
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
     position: fixed;
 }
-
 a {
     text-decoration: none;
 }
-
 #home-pagelogo {
     box-sizing: content-box;
     display: flex;
@@ -29,7 +27,6 @@ a {
     width: 37px;
     height: 37px;
 }
-
 #navbar_about {
     display: flex;
     align-items: center;
@@ -41,15 +38,18 @@ a {
     color: rgb(110, 109, 109);
     box-sizing: border-box;
 }
-
-#navbar_homepage {
+#navbar_homepage, .oil-flow {
     display: flex;
    align-items: center;
     box-sizing: border-box;
     box-sizing: border-box;
+    font-family: Source Sans Pro,sans-serif;
+    font-size: 20px;
+;
+}
+.oil-flow{
     font-weight: 1000;
 }
-
 #navbar_search {
     background-image: url('../images/loupe.png');
     background-color: blue;

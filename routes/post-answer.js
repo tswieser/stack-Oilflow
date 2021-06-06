@@ -11,9 +11,6 @@ const answerValidators = [
         .withMessage("Answer cannot be empty.")
 ];
 
-
-
-
 router.post('/', csrfProtection, requireAuth, answerValidators, asyncHandler(async (req, res, next) => {
 
     const { answer_body, question_id } = req.body;
