@@ -1,24 +1,19 @@
 extends index
 append head
+    script(src="/javascripts/answer-ajax.js" type="module")
     script(src="/javascripts/question_votes.js" type="module")
     script(src="/javascripts/answer_votes.js" type="module")
-    script(src="/javascripts/answer-ajax.js" type="module")
 block content
-    p(class= "question_id" id=question.id)
     div(id='grid-container')
-    p(id='q-title')=question.question_title
-    p(id='q-body')=question.question_body
-        button(id="question_upvote") upvote 
-        button(id="question_downvote") downvote
-        //- p(id='q-id')=question.id
-        //- script=console.log(`THIS IS ID`,question.id)
+        p(id='q-title')=question.question_title
+        p(id='q-body')=question.question_body
         div(id="answer-container") Answers
             if answersArr
                 each answer in answersArr
-                    div(id=`q_answers_${answer.id}`)
+                    div(id='q-answers')
                         p=answer.body
-                            div(class=`answer_vote_${answer.id}`)=answer.votes
-                                button(class="answer_upvote" id=`${answer.id}`) upvote 
+                              div(class=`answer_vote_${answer.id}`)=answer.votes
+                                button(class="answer_upvote" id=`${answer.id}`) upvote
                                 button(class="answer_downvote" id=`${answer.id}`) downvote
         div(id="your-answer")
             form(id="answer-form")
@@ -27,7 +22,4 @@ block content
                 label(for="answer_body")
                 textarea(name="answer_body" cols="92" rows="15" tabindex="101" id="textArea")
                 button(type="submit" id="submit-answer") Post Your Answer
-        //- div(id="side-nav")
-        //-         <a href="/">Home</a>
-        //-         p Public
-        //-         <a href="#">Link 2</a>
+
