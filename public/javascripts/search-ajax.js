@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 })
                 qContainer.innerHTML = filteredQs;
             } else {
-                qContainer.innerHTML = `<div class="not-found"><h1>Search result for :${e.target.value}</h1><br><h2>Found 0 matches</h2></div>`;
+                qContainer.innerHTML = `<div class="not-found"><h1>Search results for :${e.target.value}</h1><br><h2>Found 0 matches</h2></div>`;
             }
         }
 
