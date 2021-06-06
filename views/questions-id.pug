@@ -4,14 +4,13 @@ append head
     script(src="/javascripts/answer_votes.js" type="module")
     script(src="/javascripts/answer-ajax.js" type="module")
 block content
-    p(class= "question_id" id=question.id)
     div(id='grid-container')
-    p(id='q-title')=question.question_title
-    p(id='q-body')=question.question_body
-        button(id="question_upvote") upvote 
-        button(id="question_downvote") downvote
-        //- p(id='q-id')=question.id
-        //- script=console.log(`THIS IS ID`,question.id)
+        p(class= "question_id" id=question.id)
+        p(id='q-title')=question.question_title
+        p(id='q-body')=question.question_body
+            button(id="question_upvote") upvote 
+            button(id="question_downvote") downvote
+
         div(id="answer-container") Answers
             if answersArr
                 each answer in answersArr
