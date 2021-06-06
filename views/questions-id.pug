@@ -7,14 +7,17 @@ block content
     div(id='grid-container')
         p(id='q-title')=question.question_title
         p(id='q-body')=question.question_body
+            button(id="question_upvote" class="") upvote
+            button(id="question_downvote" class="") downvote 
         div(id="answer-container") Answers
             if answersArr
                 each answer in answersArr
                     div(id='q-answers')
                         p=answer.body
-                              div(class=`answer_vote_${answer.id}`)=answer.votes
-                                button(class="answer_upvote" id=`${answer.id}`) upvote
-                                button(class="answer_downvote" id=`${answer.id}`) downvote
+                    div(class="vote-container")
+                        button(class=`answer_upvote` id=`${answer.id}`) upvote
+                        div(class=`answer_vote_${answer.id}`)=answer.votes
+                        button(class=`answer_downvote` id=`${answer.id}`) downvote
         div(id="your-answer")
             form(id="answer-form")
                 input(type="hidden" name="_csrf" value=csrfToken id="_csrf")
@@ -22,4 +25,3 @@ block content
                 label(for="answer_body")
                 textarea(name="answer_body" cols="92" rows="15" tabindex="101" id="textArea")
                 button(type="submit" id="submit-answer") Post Your Answer
-
