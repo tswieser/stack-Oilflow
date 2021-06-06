@@ -12,6 +12,7 @@ const loginRouter = require('./routes/login');
 const questionsRouter = require('./routes/questions');
 const answerRouter = require('./routes/post-answer');
 const apiRouter = require('./routes/api');
+const searchRouter = require('./routes/search');
 const { environment, sessionSecret } = require('./config')
 const { restoreUser } = require('./auth')
 
@@ -48,7 +49,7 @@ app.use('/users/login', loginRouter);
 app.use('/questions', questionsRouter);
 app.use('/answers', answerRouter);
 app.use('/votes', apiRouter);
-
+app.use('/search', searchRouter)
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
 //   next(createError(404));

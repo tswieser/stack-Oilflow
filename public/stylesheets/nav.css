@@ -12,11 +12,9 @@
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
     position: fixed;
 }
-
 a {
     text-decoration: none;
 }
-
 #home-pagelogo {
     box-sizing: content-box;
     display: flex;
@@ -24,12 +22,11 @@ a {
 }
 #logo_img {
     background-image: url('../images/3oillogo.jpeg');
-    background-size: 33px;
+    background-size: 32px;
     background-repeat: no-repeat;
-    width: 35px;
-    height: 35px;
+    width: 37px;
+    height: 37px;
 }
-
 #navbar_about {
     display: flex;
     align-items: center;
@@ -41,15 +38,18 @@ a {
     color: rgb(110, 109, 109);
     box-sizing: border-box;
 }
-
-#navbar_homepage {
+#navbar_homepage, .oil-flow {
     display: flex;
    align-items: center;
     box-sizing: border-box;
     box-sizing: border-box;
+    font-family: Source Sans Pro,sans-serif;
+    font-size: 20px;
+;
+}
+.oil-flow{
     font-weight: 1000;
 }
-
 #navbar_search {
     background-image: url('../images/loupe.png');
     background-color: blue;
@@ -89,19 +89,20 @@ a {
 
 .nav_forms {
     margin-left: 10px;
-    /* padding-right: 130px; */
+
     display: flex;
     width: 170px;
 }
 
 #login-nav {
-    position: relative;
+    /* NO NEED FOR POS RELATIVE HERE
+TOOK IT OUT FOR BETTER ALIGNMENT */
     box-sizing: border-box;
-    width: 70px;
+    width: 60px;
     border-radius: 3px;
     border: 1px solid #1a4768;
     font-size: 13px;
-    /* display: inline-block; */
+    margin-right: 5px;
     color: #39739D;
     background-color: #e1ecf4;
     padding: .8em;
@@ -115,17 +116,16 @@ a {
 }
 
 #signup-nav{
-    position: relative;
+/* NO NEED FOR POS RELATIVE HERE
+TOOK IT OUT FOR BETTER ALIGNMENT */
     box-sizing: border-box;
-    width: 70px;
+    width: 67px;
     border-radius: 3px;
     border: 1px solid #04365a;
     font-size: 13px;
-    /* display: inline-block; */
     color: white;
     background-color: #0095FF;
     padding: .8em;
-    margin: 2px;
     height: 35.2px;
     top:1px;
     font-size: 13px;

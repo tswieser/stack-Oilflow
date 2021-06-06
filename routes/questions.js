@@ -5,7 +5,6 @@ const { csrfProtection, asyncHandler, check, validationResult } = require('./uti
 const { requireAuth } = require('../auth');
 
 
-
 class QuestionObject {
     constructor(id, title, body, answers, votes) {
         this.id = id,
@@ -32,14 +31,14 @@ const questionValidator = [
         .isLength({ max: 200 })
         .withMessage("Title can not be greater than 200 characters"),
     check('question_body')
-        .exists({ checkFalsy: true })
+    .exists({ checkFalsy: true })
         .withMessage("Please enter your question")
 
-]
+    ]
 
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
-    let questionsArr = []
+    let questionsArr = [];
     const questions = await Question.findAll({
         include: [Answer, Question_like]
     });
@@ -65,7 +64,7 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
 
     res.render('questions', {
         title: 'Questions',
-        questions,
+        // questions,
         questionsArr
     });
 }))
