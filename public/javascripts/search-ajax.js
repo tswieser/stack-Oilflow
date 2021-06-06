@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", ()=> {
            return obj.title.toLowerCase().includes(e.target.value.toLowerCase())
         })
         if (e.key === "Enter") {
-            if (filtered) {
+            if (filtered.length) {
                 // window.location.replace("/questions")
-                console.log(qContainer)
-                console.log(filtered)
+                // console.log(qContainer)
+                // console.log(filtered)
                 // qContainer.innerHTML = "";
                 const filteredQs = filtered.map(q => {
                     return `<div class="question_div">
@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
                             </div>`
                 })
                 qContainer.innerHTML = filteredQs;
+            } else {
+                qContainer.innerHTML = `<div class="not-found"><h1>Search result for :${e.target.value}</h1><br><h2>Found 0 matches</h2></div>`;
             }
         }
 
