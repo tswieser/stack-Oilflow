@@ -5,8 +5,9 @@ block content
         div.header_div
             h2#questions_title All Questions
             a(href="/questions/ask" class="blue_btn") Ask Question
-    if questions
-        each question in questions
+    if questionsArr
+        div(id="question-container")
+        each question in questionsArr
             div.question_div
                 div.stats
                     div.votes_div
