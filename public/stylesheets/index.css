@@ -61,9 +61,7 @@ h1 {
 }
 .main-grid-container {
   display: grid;
-  grid-template-areas:
-    "ls main rs"
-   ;
+  grid-template-areas: "ls main rs";
   grid-template-columns: 3.3% 93.4% 3.3%;
   grid-template-rows: auto;
 }
@@ -214,12 +212,12 @@ h1 {
   margin-top: 513px;
   margin-left: -16px;
 }
-.left-grn1{
-border-radius: 13% 13% 0 13%;
+.left-grn1 {
+  border-radius: 13% 13% 0 13%;
 }
-.left-grn2{
-    margin-left: 33px;
-    border-radius: 0 13% 13% 13%;
+.left-grn2 {
+  margin-left: 33px;
+  border-radius: 0 13% 13% 13%;
   opacity: 0.25;
 }
 .left-grn1,
@@ -228,4 +226,52 @@ border-radius: 13% 13% 0 13%;
   height: 33px;
   background-color: #48a868;
 }
-.fake-text
+.fake-text-l,
+.fake-text-r {
+  background-image: url("https://cdn.sstatic.net/Img/home/illo-code.svg?v=b7ee00fff9d8");
+  grid-area: main;
+  background-repeat: no-repeat;
+  background-size: 184px;
+}
+.fake-text-l {
+  margin-top: 24%;
+  margin-left: 7.5%;
+}
+.fake-text-r {
+  margin-left: 78%;
+  margin-top: 7%;
+}
+.block-letters {
+  width: 700px;
+  margin-left: 25.5%;
+  color: white;
+}
+.orange-letters{
+  color: #f2720c;
+}
+.block-letters,
+.orange-letters {
+  grid-area: main;
+  font-family: "Roboto Slab Bold", serif;
+  font-size: 63px;
+  font-weight: 700;
+  margin-top: 35%;
+  text-align: center;
+
+}
+.right-blu{
+    width: 36px;
+    height: 36px;
+    grid-area: main;
+    margin-left: 91.9%;
+    margin-top: 7.9%;
+}
+.right-blu1, .right-blu2{
+    width:18px;
+    height: 18px;
+    background-color: #27348b;
+}
+.right-blu2{
+    opacity: 0.25;
+    margin-left: 18px;
+}
