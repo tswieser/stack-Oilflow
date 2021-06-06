@@ -11,7 +11,7 @@ logoutRouter.use(cookieParser());
 
 
 
-logoutRouter.get("/", csrfProtection, asyncHandler((req, res) => {
+logoutRouter.get("/", asyncHandler((req, res) => {
     logoutUser(req, res)
     return res.redirect("/")
 }));
