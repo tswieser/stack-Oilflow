@@ -17,4 +17,4 @@ block content
                             p answers
                     div.content_div
                         a(href=`/questions/${question.id}` id='quest_title')=question.title
-                        p=question.body.substring(1, 300) + '...'
+                        p=question.body.substring(0, 300) + '...'

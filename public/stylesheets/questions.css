@@ -45,7 +45,10 @@ font-size: 13px;
     padding-top: 50px;
     padding-right: 19%;
     color: rgb(36, 39, 41);
-    font-size: 13px
+    font-size: 13px;
+}
+.content_div p{
+margin-left: 10px;
 }
 
 .content_div a{
