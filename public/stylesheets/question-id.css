@@ -74,18 +74,12 @@
     background-color: #0576c7;
 }
 
-/* .vote-container{
+.vote-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-content: center;
-    width: 10px;
-
-    
     box-sizing: border-box;
     grid-area: answer;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
 }
 
 .question_downvote, .answer_downvote{
@@ -108,6 +102,12 @@
     background-repeat: no-repeat;
     background-image: url("/images/vote_arrow.png");
 }
+.answer_downvote{
+    margin-left: 5px;
+}
+.answer_upvote{
+    margin-right: 5px;
+}
 .question_upvote{
     margin-bottom: 20px;
 }
@@ -120,4 +120,4 @@
     grid-area: body;
     display: flex;
     flex-direction: column;
-} */
+}

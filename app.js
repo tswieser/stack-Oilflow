@@ -49,7 +49,7 @@ app.use('/users/login', loginRouter);
 app.use('/questions', questionsRouter);
 app.use('/answers', answerRouter);
 app.use('/votes', apiRouter);
-app.use('/search', searchRouter)
+app.use('/search', searchRouter);
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
 //   next(createError(404));
