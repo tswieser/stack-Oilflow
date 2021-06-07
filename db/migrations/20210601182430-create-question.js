@@ -14,7 +14,7 @@ module.exports = {
       },
       question_body: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       user_id: {
         allowNull: false,

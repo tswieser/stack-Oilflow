@@ -3,22 +3,55 @@ extends layout
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="../stylesheets/index.css")
+  link(rel="stylesheet" href="../stylesheets/questions.css")
   link(rel="stylesheet" href="../stylesheets/nav.css")
+  link(rel="stylesheet" href="../stylesheets/question-id.css")
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
-
-  h1= title
   div
     nav(id="nav_bar")
-      div(id="navbar_links" class="inactive")
-        a(href="http://") Questions
-        a(href="http://") Tags
-        a(href="http://") Profile
-      div
-        a(href="/") Stack oil Flow
-        a(href="/about" id="navbar_about") About
-      input(type="text" placeholder="Search..." id="navbar_search" img)
+      //- div(id="navbar_links" class="inactive")
+      //-   a(href="http://") Questions
+      //-   a(href="http://") Tags
+      //-   a(href="http://") Profile
+      div(id="home-pagelogo")
+        a(href="/" class="Logo" id="logo_img" )
+        a(href="/" id="navbar_homepage") stack <span class="oil-flow"> oilflow</span>
+        a(href="https://github.com/tswieser/stack-Oilflow/blob/main/README.md" id="navbar_about") About
+        a(href="/questions" id="navbar_about") Questions
+      input(type="text" name="searchvalue" placeholder="Search..." id="navbar_search" img)
       div(class="nav_forms")
-        a(href="/users/login" class="" id="login-nav") Log in
-        a(href="/users/new" class="" id="signup-nav") Sign up
+        a(href="/users/login" id="login-nav") Log in
+        a(href="/users/new" id="signup-nav") Sign up
 block content
+  div(class="main-grid-container")
+    div.main-content
+      div.bubbles
+        div.beige
+          <img src="../images/front-loupe.png" alt="loupe" class="loupe-img">
+          p(class='beige-txt') Find the best answer to your automotive question, help others answer theirs
+          a(href="/questions/" class="home-links") Browse our questions
+        div.blue
+          <img src="../images/padlock.png" alt="loupe" class="padlock-img">
+          p(class='blue-txt') A secure place where you can interact with other members of the car community
+          a(href="/users/new" class="home-links2") Join our community
+    div(class="top-left")
+    div(class="top-right")
+    div(class="mid-left")
+      div(class="mid-left1")
+      div(class="mid-left2")
+    div(class="mid-right")
+      div(class="mid-right1")
+      div(class="mid-right2")
+    div(class="left-grn")
+      div(class="left-grn1")
+      div(class="left-grn2")
+    div(class="fake-text-l")
+    div(class="fake-text-r")
+    div(class="right-blu")
+      div(class="right-blu1")
+      div(class="right-blu2")
+    div(class="block-letters") Every <span class='orange-letters'>gear head</span> has a tab open to Stack Oilflow
