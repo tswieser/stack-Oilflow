@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     question_votes: DataTypes.BOOLEAN
   }, {});
   Question_like.associate = function(models) {
-    // associations can be defined here
+
+    Question_like.belongsTo(models.Question, {foreignKey: "question_id"});
   };
   return Question_like;
 };

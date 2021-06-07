@@ -1,0 +1,30 @@
+extends index
+append head
+    script(src="/javascripts/answer-ajax.js" type="module")
+    script(src="/javascripts/question_votes.js" type="module")
+    script(src="/javascripts/answer_votes.js" type="module")
+block content
+    div(id='grid-container')
+        p(class= "question_id" id=question.id)
+        div(class="vote-container-1")
+            button(id="question_upvote" class="question_upvote") 
+            button(id="question_downvote" class="question_downvote")
+        p(id='q-title')=question.question_title
+        p(id='q-body')=question.question_body
+            //- div(class=`question_vote_${question.id} vote_count`)=question.votes
+        div(id="answer-container") Answers
+            if answersArr
+                each answer in answersArr
+                    div(id='q-answers')
+                        p=answer.body
+                            div(class="vote-container")
+                                button(class=`answer_upvote` id=`${answer.id}`)
+                                div(class=`answer_vote_${answer.id} vote_count`)=answer.votes
+                                button(class=`answer_downvote` id=`${answer.id}`)
+        div(id="your-answer")
+            form(id="answer-form")
+                input(type="hidden" name="_csrf" value=csrfToken id="_csrf")
+                p(id="your-ans") Your Answer
+                label(for="answer_body")
+                textarea(name="answer_body" cols="92" rows="15" tabindex="101" id="textArea")
+                button(type="submit" id="submit-answer") Post Your Answer

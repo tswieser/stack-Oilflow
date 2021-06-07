@@ -7,7 +7,10 @@
    display: flex;
    justify-content: space-between;
    border-bottom:1px solid lightgrey;
-  padding: 20px;
+  padding-top: 80px;
+  padding-left: 290px;
+  padding-right: 290px;
+
 }
 
 .question_div{
@@ -27,7 +30,7 @@
 .stats{
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
+    padding-left: 19%;
     padding-top: 20px;
 }
 
@@ -40,23 +43,38 @@ font-size: 13px;
     flex-direction: column;
     padding-left: 5em;
     padding-top: 50px;
+    padding-right: 19%;
+    color: rgb(36, 39, 41);
+    font-size: 13px
 }
 
 .content_div a{
- color:rgb(73, 73, 223);
+ color: #0077CC;
  text-decoration: none;
+ font-size: 17px;
 }
 
+#quest_title:hover{
+    color: #0095FF
+}
+
+
+
 .blue_btn{
-    background-color: #2ca2f7;
-    text-decoration: none;
     color: white;
-    border-radius: 4px;
-    padding: .5em;
-    width: 150px;
-    border: 1px solid lightgrey;
+    background-color: #0095FF;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 10px;
+    height: 36px;
+    width: 100px;
+    border: 1px solid #04365a;
     transition: background-color;
     text-align: center;
+    font-size: 13px;
+    margin: 2px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif;
+
 }
 
 .blue_btn:hover{

@@ -8,11 +8,11 @@ block content
 
 
      div.form_container
-        form(method="post" action="/questions/ask" class= "signup")
+        form(method="post" action="/questions/ask" class= "signup" id="ask-quest")
             input(type="hidden", name="_csrf", value= csrfToken)
             div
             label(for="question_title") Question Title
-            input(type="text", name="question_title", value="", class="signup_input")
+            input(type="text", name="question_title", value="", class="signup_input" id="ask_input")
             div
             label(for="question_body") Question Body
             textarea(name="question_body", value="", class="signup_input")

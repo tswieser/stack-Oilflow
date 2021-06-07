@@ -11,7 +11,7 @@ loginRouter.use(cookieParser());
 
 loginRouter.get("/", csrfProtection, asyncHandler(async (req, res, next) => {
 
-    res.render("login", { csrfToken: req.csrfToken() })
+    res.render("login", { csrfToken: req.csrfToken(), title: "Login" })
 }));
 
 const loginValidators = [

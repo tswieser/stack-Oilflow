@@ -1,24 +1,62 @@
 #nav_bar {
     background-color: #fafafb;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 47px;
+    width: 100%;
     font-size: 13px;
     font-weight: 400;
     box-shadow: 0px;
+    border-top: 3px solid #F78222;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+    position: fixed;
 }
-
 a {
     text-decoration: none;
 }
-
-#navbar_about {
-    font-size: 11px;
+#home-pagelogo {
+    box-sizing: content-box;
+    display: flex;
+    width: 350px;
 }
-
+#logo_img {
+    background-image: url('../images/3oillogo.jpeg');
+    background-size: 32px;
+    background-repeat: no-repeat;
+    width: 37px;
+    height: 37px;
+}
+#navbar_about {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 12px;
+    color: rgb(110, 109, 109);
+    box-sizing: border-box;
+}
+#navbar_homepage, .oil-flow {
+    display: flex;
+   align-items: center;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: Source Sans Pro,sans-serif;
+    font-size: 20px;
+;
+}
+.oil-flow{
+    font-weight: 1000;
+}
 #navbar_search {
+    background-image: url('../images/loupe.png');
+    background-color: blue;
+    background-size: 17px;
+    background-repeat: no-repeat;
+    background-position-x: 10px;
+    background-position-y: 7px;
     height: 35.2px;
     background-color: white;
     padding: 7.8px 9.1px 7.8px 32px;
@@ -26,38 +64,72 @@ a {
     margin: 0;
     border: 1px solid #bbc0c4;
     border-radius: 3px;
-    font-size: 13px;
     font-family: inherit;
     max-width: 638px;
-    /* border-radius: none; */
 }
 
-#inactive {
+@media (max-width: 1020px) {
+    #navbar_search {
+        width: 70%;
+    }
+}
+@media (max-width: 800px) {
+    #navbar_search {
+        width:65%;
+    }
+}
+@media (max-width: 670px) {
+    #navbar_search {
+        width: 40%;
+    }
+    /* #navbar_homepage {
 
+    } */
 }
 
 .nav_forms {
+    margin-left: 10px;
 
+    display: flex;
+    width: 170px;
 }
 
 #login-nav {
-    position: relative;
+    /* NO NEED FOR POS RELATIVE HERE
+TOOK IT OUT FOR BETTER ALIGNMENT */
+    box-sizing: border-box;
+    width: 60px;
     border-radius: 3px;
-    border: 1px solid ;
-    display: inline-block;
+    border: 1px solid #1a4768;
+    font-size: 13px;
+    margin-right: 5px;
     color: #39739D;
     background-color: #e1ecf4;
     padding: .8em;
-    margin: 2px;
+    height: 35.2px;
+    top:3px;
+    font-size: 13px;
+    text-align: center;
+}
+#login-nav:hover {
+    background-color: #c6dcec;
 }
 
 #signup-nav{
-    position: relative;
+/* NO NEED FOR POS RELATIVE HERE
+TOOK IT OUT FOR BETTER ALIGNMENT */
+    box-sizing: border-box;
+    width: 67px;
     border-radius: 3px;
-    border: 1px solid ;
-    display: inline-block;
+    border: 1px solid #04365a;
+    font-size: 13px;
     color: white;
     background-color: #0095FF;
     padding: .8em;
-    margin: 2px;
+    height: 35.2px;
+    top:1px;
+    font-size: 13px;
+}
+#signup-nav:hover {
+    background-color: #0576c7;
 }
