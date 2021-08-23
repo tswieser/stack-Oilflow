@@ -2,12 +2,14 @@
 extends index
 
 block content
-        if errors
-            ul.error_list
-                each err in errors
-                    li=err
+
         div
+          if errors
+                ul.error_list
+                    each err in errors
+                        li=err
           div.form_container
+
             form(action="/users/login" method="post" class= "signup")
               input(type="hidden" name="_csrf" value=csrfToken)
               div

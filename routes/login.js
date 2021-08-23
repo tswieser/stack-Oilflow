@@ -30,6 +30,7 @@ loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, 
 
     if (validationErrors.isEmpty()) {
         const user = await User.findOne({ where: { email } })
+
         if (user) {
             const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
             if (passMatch) {
@@ -38,13 +39,14 @@ loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, 
             }
         }
         errors.push('Login password/email combination is not valid.')
-    } else {
-        res.render('login', {
-            title: 'Login',
-            errors,
-            csrfToken: req.csrfToken()
-        })
     }
+
+    res.render('login', {
+        title: 'Login',
+        errors,
+        csrfToken: req.csrfToken()
+    })
+
 }));
 
 loginRouter.post('/demo', csrfProtection, asyncHandler(async (req, res, next) => {
