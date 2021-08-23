@@ -47,4 +47,5 @@ module.exports = {
     restoreUser,
     logoutUser,
     requireAuth
+
 }
