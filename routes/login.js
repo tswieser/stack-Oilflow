@@ -40,17 +40,18 @@ loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, 
     }
     if (user) {
         const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
+
         if (passMatch) {
                 loginUser(req, res, user)
                 return res.redirect('/')
-        } else {
+        }
             errors.push('Password is incorrect')
             res.render('login', {
                 title: 'Login',
                 errors: errors,
                 csrfToken: req.csrfToken()
             })
-        }
+
     } else {
         errors = validationErrors.array().map((error) => error.msg);
     }
