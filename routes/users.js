@@ -9,12 +9,12 @@ const { loginUser, logoutUser } = require('../auth')
 const userValidator = [
   check('first_name')
     .exists({ checkFalsy: true })
-    .withMessage("PLease enter your first name")
+    .withMessage("Please enter your first name")
     .isLength({ max: 200 })
     .withMessage("First name can not be greater than 50 characters"),
   check('last_name')
     .exists({ checkFalsy: true })
-    .withMessage("PLease enter your last name")
+    .withMessage("Please enter your last name")
     .isLength({ max: 200 })
     .withMessage("last name can not be greater than 50 characters"),
   check('email')

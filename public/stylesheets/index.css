@@ -1,12 +1,21 @@
 h1 {
   color: #555555;
 }
+
+.error_holder{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5%;
+}
+
 .error_list > li {
+  text-align: center;
   background-color: #ec0d0d71;
   border: 1px solid rgb(179, 179, 179);
-  max-width: 500px;
-  padding: 5px;
-  margin: 10px 0px 10px 15em;
+  max-width: 250px;
+  /* padding: 5px; */
+  margin-top: 10px;
   list-style-type: none;
   border-radius: 4px;
   color: white;
@@ -21,7 +30,7 @@ h1 {
   color: #0077cc;
 }
 .signup {
-  margin-top: 110px;
+  margin-top: 6%;
   display: flex;
   flex-direction: column;
   width: 300px;
