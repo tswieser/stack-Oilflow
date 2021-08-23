@@ -20,6 +20,37 @@ h1 {
 .form_container a {
   color: #0077cc;
 }
+
+.demo_button_signup{
+  display: flex;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  margin-top:50px;
+}
+.demo_button{
+  display: flex;
+  align-items: center;
+  align-content: space-around;
+  justify-content: center;
+  margin-left:0px;
+}
+.demo_submit_btn{
+  background-color: #2ca2f7;
+  color: white;
+  border-radius: 4px;
+  padding: 0.5em;
+  margin-top: 25px;
+  width: 200px;
+  border: 1px solid lightgrey;
+  transition: background-color;
+}
+.demo_submit_btn:hover {
+  background-color: #066bb3;
+  transition: background 0.1s ease-in-out;
+  cursor: pointer;
+}
+
 .signup {
   margin-top: 110px;
   display: flex;
@@ -58,6 +89,7 @@ h1 {
 .signup_btn:hover {
   background-color: #066bb3;
   transition: background 0.1s ease-in-out;
+  cursor: pointer;
 }
 .main-grid-container {
   display: grid;

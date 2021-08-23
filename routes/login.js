@@ -47,6 +47,16 @@ loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, 
     }
 }));
 
+loginRouter.post('/demo', csrfProtection, asyncHandler(async (req, res, next) => {
+    const demoUser = await User.findOne({
+        where: {
+            email: 'demo@aa.io'
+        }
+    })
+    loginUser(req, res, demoUser)
+    return res.redirect('/')
+}));
+
 
 
 

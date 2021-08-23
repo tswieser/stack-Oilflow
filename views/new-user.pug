@@ -28,3 +28,7 @@ block content
                 input(type="password", name="check_password", value="", class="signup_input")
                 div
                 button(type="submit" class="signup_btn") Sign Up
+        div.demo_button_signup
+            form(action="/users/login/demo" method="post" )
+              input(type="hidden" name="_csrf" value=csrfToken)
+              button(type= "submit" class= "demo_submit_btn") Demo User Login

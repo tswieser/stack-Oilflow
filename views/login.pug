@@ -19,5 +19,9 @@ block content
               div
               button(type="submit" class="signup_btn") Submit
           div.form_container
-            p Don't have an account? 
+            p Don't have an account?
              a(href="/users/new") Sign  up
+          div.demo_button
+            form(action="/users/login/demo" method="post" )
+              input(type="hidden" name="_csrf" value=csrfToken)
+              button(type= "submit" class= "demo_submit_btn") Demo User Login
