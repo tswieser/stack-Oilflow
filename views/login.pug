@@ -3,6 +3,7 @@ extends index
 
 block content
         if errors
+          div(class='error_holder')
             ul.error_list
                 each err in errors
                     li=err
@@ -12,12 +13,12 @@ block content
               input(type="hidden" name="_csrf" value=csrfToken)
               div
               label(for="email") Email
-              input(type="email" name="email" class="signup_input")
+              input(type="email" name="email" class="signup_input" required)
               div
               label(for="password") Password
-              input(type="password" name="password" class="signup_input")
+              input(type="password" name="password" class="signup_input" required)
               div
               button(type="submit" class="signup_btn") Submit
           div.form_container
-            p Don't have an account? 
-             a(href="/users/new") Sign  up
+            p Don't have an account?
+             a(href="/users/new") Sign up
