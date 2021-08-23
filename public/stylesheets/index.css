@@ -71,7 +71,7 @@ h1 {
   background-image: linear-gradient(#25282a, #44494e);
   grid-area: main;
   width: 100%;
-  height: 626px;
+  height: 800px;
   border-radius: 10px;
 }
 .bubbles {

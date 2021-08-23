@@ -1,3 +1,13 @@
+# Contributors
+
+David Mejia 
+
+Timothy Wieser
+
+Jubin Taghdir
+
+Cristhian Morales
+
 # Welcome to Stack-Oil-flow
 
 Stack Oil flow is a social based platform that allows users to utilize question and answer based features to both share and gain Automotive based knowledge. The main goal of Stack Oil Flow is to cultivate an environment  of automotive enthusiasts, both recreational and professional to come together over a shared passion.
