@@ -112,6 +112,27 @@ TOOK IT OUT FOR BETTER ALIGNMENT */
     background-color: #c6dcec;
 }
 
+.log_out_btn{
+    box-sizing: border-box;
+    width: 80px;
+    border-radius: 3px;
+    border: 1px solid #1a4768;
+    font-size: 13px;
+    margin-right: 5px;
+    color: white;
+    background-color: #0095FF;
+    padding: .8em;
+    height: 35.2px;
+    top:3px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.log_out_btn:hover{
+    background-color: #0576c7;
+    cursor: pointer;
+}
+
 #signup-nav{
 /* NO NEED FOR POS RELATIVE HERE
 TOOK IT OUT FOR BETTER ALIGNMENT */

@@ -27,8 +27,7 @@ append head
         if session
           form(action="/logout" method="post")
             input(type="hidden" name="_csrf" value=csrfToken)
-            button(type= "submit" class= "login-nav") Log Out
-            //- a(href="/users/login" id="login-nav") LogOut
+            button(type= "submit" class= "log_out_btn") Log Out
         if !session
           a(href="/users/login" id="login-nav") Log in
           a(href="/users/new" id="signup-nav") Sign up
