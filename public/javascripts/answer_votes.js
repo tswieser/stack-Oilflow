@@ -1,4 +1,4 @@
-// const { json } = require("sequelize/types");
+
 
 const upvote = document.querySelectorAll(".upvote");
 const downvote = document.querySelectorAll(".downvote");
@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", e => {
         if(!isButton){
             return
         } else {
-            
+
             const vote = e.target.className;
             const answerId = e.target.id;
             const votes = document.querySelector(`.answer_vote_${answerId}`);
@@ -22,8 +22,7 @@ window.addEventListener("DOMContentLoaded", e => {
                         method: "POST",
                     });
                     const json = await res.json();
-                    if(!res.ok) console.log(json.message)
-                    console.log(json)
+
                     votes.innerHTML = json.voteCount;
                 }
 
@@ -36,8 +35,7 @@ window.addEventListener("DOMContentLoaded", e => {
                         method: "POST"
                     })
                     const json = await res.json();
-                    if(!res.ok) console.log(json.message)
-                    console.log(json)
+
                     votes.innerHTML = json.voteCount;
                 }
                 downvote();

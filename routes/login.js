@@ -26,26 +26,35 @@ const loginValidators = [
 loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
     const validationErrors = validationResult(req);
-    const errors = [];
+    const user = await User.findOne({ where: { email } })
+    let errors = [];
 
-    if (validationErrors.isEmpty()) {
-        const user = await User.findOne({ where: { email } })
+    if (!user) {
+        errors.push('Provided User does not exist')
+        res.render('login', {
+            title: 'Login',
+            errors: errors,
+            csrfToken: req.csrfToken()
+        })
 
-        if (user) {
-            const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
-            if (passMatch) {
-                loginUser(req, res, user)
-                return res.redirect('/')
-            }
-        }
-        errors.push('Login password/email combination is not valid.')
     }
+    if (user) {
+        const passMatch = await bcrypt.compare(password, user.hashed_password.toString());
 
-    res.render('login', {
-        title: 'Login',
-        errors,
-        csrfToken: req.csrfToken()
-    })
+        if (passMatch) {
+            loginUser(req, res, user)
+            return res.redirect('/')
+        }
+        errors.push('Password is incorrect')
+        res.render('login', {
+            title: 'Login',
+            errors: errors,
+            csrfToken: req.csrfToken()
+        })
+
+    } else {
+        errors = validationErrors.array().map((error) => error.msg);
+    }
 
 }));
 
@@ -57,9 +66,7 @@ loginRouter.post('/demo', csrfProtection, asyncHandler(async (req, res, next) =>
     })
     loginUser(req, res, demoUser)
     return res.redirect('/')
+
+
 }));
-
-
-
-
-module.exports = loginRouter
+    module.exports = loginRouter

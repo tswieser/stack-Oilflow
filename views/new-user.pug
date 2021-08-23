@@ -2,6 +2,7 @@ extends index
 
 block content
         if errors
+         div(class='error_holder')
             ul.error_list
                 each err in errors
                     li=err

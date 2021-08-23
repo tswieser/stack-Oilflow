@@ -7,16 +7,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
     searchbar.addEventListener("keypress", async(e) => {
         const res = await fetch("/search");
         const result = await res.json();
-        // console.log(result.questions)
+       
         const filtered = result.questionsArr.filter(obj => {
            return obj.title.toLowerCase().includes(e.target.value.toLowerCase())
         })
         if (e.key === "Enter") {
             if (filtered.length) {
-                // window.location.replace("/questions")
-                // console.log(qContainer)
-                // console.log(filtered)
-                // qContainer.innerHTML = "";
+
                 const filteredQs = filtered.map(q => {
                     return `<div class="question_div">
                                 <div class="stats">

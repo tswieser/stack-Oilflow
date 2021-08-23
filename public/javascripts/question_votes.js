@@ -7,8 +7,7 @@ const upvote = async (e) => {
       method: "POST",
     });
     const json = await res.json();
-    if(!res.ok) console.log(json.message)
-    console.log(json)
+
 }
 
 const downvote = async (e) => {
@@ -17,8 +16,6 @@ const downvote = async (e) => {
         method: "POST"
     })
     const json = await res.json();
-    if(!res.ok) console.log(json.message)
-    console.log(json)
 }
 questionUpVote.addEventListener("click", upvote);
 questionDownVote.addEventListener("click", downvote);

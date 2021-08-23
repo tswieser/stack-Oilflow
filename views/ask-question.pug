@@ -1,14 +1,12 @@
 extends index
 
 block content
-     if errors
-         ul.error_list
-            each err in errors
-                 li=err
-
-
-     div.form_container
-        form(method="post" action="/questions/ask" class= "signup" id="ask-quest")
+    if errors
+            ul.error_list
+                each err in errors
+                        li=err
+    div.form_container
+        form(method="post" action="/questions/ask" class="signup" id="ask-quest")
             input(type="hidden", name="_csrf", value= csrfToken)
             div
             label(for="question_title") Question Title

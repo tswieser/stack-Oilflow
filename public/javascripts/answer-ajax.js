@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({ answer_body: formVal.value, question_id: id, _csrf: cs }, formVal.value = "")
         })
         const result = await text.json();
-        console.log(result.createAns.answer_body)
         const container = document.getElementById('answer-container')
         container.innerHTML += `<div id="q-answers"> <p>${result.createAns.answer_body}</p></div>`
 
