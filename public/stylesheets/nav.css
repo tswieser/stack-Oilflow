@@ -96,7 +96,6 @@ a {
     /* NO NEED FOR POS RELATIVE HERE
 TOOK IT OUT FOR BETTER ALIGNMENT */
     box-sizing: border-box;
-    width: 60px;
     border-radius: 3px;
     border: 1px solid #1a4768;
     font-size: 13px;
@@ -138,7 +137,6 @@ TOOK IT OUT FOR BETTER ALIGNMENT */
 /* NO NEED FOR POS RELATIVE HERE
 TOOK IT OUT FOR BETTER ALIGNMENT */
     box-sizing: border-box;
-    width: 67px;
     border-radius: 3px;
     border: 1px solid #04365a;
     font-size: 13px;

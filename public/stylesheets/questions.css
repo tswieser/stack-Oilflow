@@ -61,8 +61,6 @@ margin-left: 10px;
     color: #0095FF
 }
 
-
-
 .blue_btn{
     color: white;
     background-color: #0095FF;
@@ -70,7 +68,6 @@ margin-left: 10px;
     border-radius: 3px;
     padding: 10px;
     height: 36px;
-    width: 100px;
     border: 1px solid #04365a;
     transition: background-color;
     text-align: center;
