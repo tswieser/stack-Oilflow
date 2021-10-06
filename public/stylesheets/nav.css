@@ -107,6 +107,7 @@ TOOK IT OUT FOR BETTER ALIGNMENT */
     top:3px;
     font-size: 13px;
     text-align: center;
+    min-width: 71.1px;
 }
 #login-nav:hover {
     background-color: #c6dcec;
@@ -146,6 +147,7 @@ TOOK IT OUT FOR BETTER ALIGNMENT */
     height: 35.2px;
     top:1px;
     font-size: 13px;
+    min-width: 70.1px;
 }
 #signup-nav:hover {
     background-color: #0576c7;
