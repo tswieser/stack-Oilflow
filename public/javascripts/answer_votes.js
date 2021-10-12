@@ -2,6 +2,10 @@
 
 const upvote = document.querySelectorAll(".upvote");
 const downvote = document.querySelectorAll(".downvote");
+const answerDiv = document.querySelectorAll("#q-answers");
+
+const errMessage = document.createElement("P")
+
 window.addEventListener("DOMContentLoaded", e => {
 
     document.addEventListener("click", e => {
@@ -15,7 +19,6 @@ window.addEventListener("DOMContentLoaded", e => {
             const answerId = e.target.id;
             const votes = document.querySelector(`.answer_vote_${answerId}`);
             
-            console.log(answerId, vote, votes)
             if(vote === "answer_upvote"){
                 const upvote = async () => {
                     e.preventDefault();
@@ -25,10 +28,16 @@ window.addEventListener("DOMContentLoaded", e => {
                     const json = await res.json();
 
                     if(json.error_vote){
-                        console.log("ERROR")
+                        votes.appendChild(errMessage)
+                        errMessage.innerText = 'already upvoted';
+                        errMessage.style.backgroundColor = '#90EE90';
+                        setTimeout(()=> {
+                            votes.removeChild(errMessage)
+                        }, 3000)
+                        return
+                    } else {
+                        votes.innerHTML = json.new_vote;
                     }
-
-                    votes.innerHTML = json.new_vote;
                 }
 
                 upvote();
@@ -40,7 +49,19 @@ window.addEventListener("DOMContentLoaded", e => {
                         method: "PUT"
                     })
                     const json = await res.json();
-                    votes.innerHTML = json.new_vote;
+
+                    if(json.status === 'error'){
+                        votes.appendChild(errMessage)
+                        errMessage.innerText = 'already downvoted';
+                        errMessage.style.backgroundColor = '#ff5959';
+                        setTimeout(()=> {
+                            votes.removeChild(errMessage)
+                        }, 3000)
+                        return
+                    } else {
+                        votes.innerHTML = json.new_vote;
+                    }
+
                 }
                 downvote();
             }

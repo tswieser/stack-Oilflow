@@ -25,6 +25,7 @@ const questionVoteCounter = async function(questionId){
     return count;
 }
 
+
 //Question API helpers
 
 const alreadyVoted = async (userId, questionId) => {
@@ -184,8 +185,8 @@ apiRouter.put(`/answers/:id(\\d+)/upvote`, asyncHandler(async(req, res) => {
             answer_votes: 1,
             user_id: userId
         })
-        let modifiedVote = await questionVoteCounter(answerId);
-        res.status(200).json({'new_vote': modifiedVote})
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
         return
     } else if(vote === true){
         res.status(406).json({
@@ -195,12 +196,12 @@ apiRouter.put(`/answers/:id(\\d+)/upvote`, asyncHandler(async(req, res) => {
         return
     } else if(vote === false){
         await changeVoteAnswer(userId, answerId)
-        let modifiedVote = await questionVoteCounter(answerId);
-        res.status(200).json({'new_vote': modifiedVote})
+
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
         return
     }
 
-    let voteCount = await answerVoteCounter(answerId);
     res.json({voteCount})
 }));
 
@@ -217,8 +218,8 @@ apiRouter.put(`/answers/:id(\\d+)/downvote`, asyncHandler(async(req, res) => {
             answer_votes: 0,
             user_id: userId
         })
-        let modifiedVote = await answerVoteCounter(answerId);
-        res.status(200).json({'new_vote': modifiedVote})
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
         return
     } else if(vote === false){
         res.status(406).json({
@@ -228,8 +229,8 @@ apiRouter.put(`/answers/:id(\\d+)/downvote`, asyncHandler(async(req, res) => {
         return
     } else if(vote === true){
         await changeVoteAnswer(userId, answerId)
-        let modifiedVote = await answerVoteCounter(answerId);
-        res.status(200).json({'new_vote': modifiedVote})
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
         return
     }
 
