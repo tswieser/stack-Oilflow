@@ -36,7 +36,6 @@ loginRouter.post("/", csrfProtection, loginValidators, asyncHandler(async (req, 
             errors: errors,
             csrfToken: req.csrfToken()
         })
-
     }
     if (user) {
         const passMatch = await bcrypt.compare(password, user.hashed_password.toString());

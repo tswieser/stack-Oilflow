@@ -2,13 +2,13 @@
 extends index
 
 block content
+        div
+          div.form_container
         if errors
           div(class='error_holder')
             ul.error_list
                 each err in errors
                     li=err
-        div
-          div.form_container
             form(action="/users/login" method="post" class= "signup")
               input(type="hidden" name="_csrf" value=csrfToken)
               div
@@ -18,7 +18,7 @@ block content
               label(for="password") Password
               input(type="password" name="password" class="signup_input" required)
               div
-              button(type="submit" class="signup_btn") Submit
+              button(type="submit" class="signup_btn") Login 
           div.form_container
             p Don't have an account?
              a(href="/users/new") Sign  up
