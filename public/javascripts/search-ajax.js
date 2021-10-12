@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     const searchbar = document.getElementById("navbar_search");
     const qContainer = document.getElementById("question-container")
 
-
     searchbar.addEventListener("keypress", async(e) => {
         const res = await fetch("/search");
         const result = await res.json();
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
         })
         if (e.key === "Enter") {
             if (filtered.length) {
-
                 const filteredQs = filtered.map(q => {
                     return `<div class="question_div">
                                 <div class="stats">
@@ -34,11 +32,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
                 })
                 qContainer.innerHTML = filteredQs;
             } else {
-                qContainer.innerHTML = `<div class="not-found"><h1>Search results for :${e.target.value}</h1><br><h2>Found 0 matches</h2></div>`;
+                qContainer.innerHTML = `<div class="not-found">
+                                            <h1>Search results for :${e.target.value}</h1>
+                                            <br>
+                                            <h2>Found 0 matches</h2>
+                                        </div>`;
             }
         }
-
     })
-
-
 })

@@ -7,7 +7,6 @@ const upvote = async (e) => {
       method: "POST",
     });
     const json = await res.json();
-
 }
 
 const downvote = async (e) => {

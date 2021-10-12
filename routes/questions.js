@@ -36,6 +36,18 @@ const questionValidator = [
 
 ]
 
+const voteCounter = (questions) => {
+
+    let questionVotes = questions.Question_likes;
+    let count = 0
+
+    for (let j = 0; j < questionVotes.length; j++) {
+        let questionLikes = questionVotes[j].question_votes
+        if (questionLikes === true) count++
+        else if (questionLikes === false) count--
+    }
+    return count;
+}
 
 router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     let questionsArr = [];
@@ -45,20 +57,12 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     });
 
     for (let i = 0; i < questions.length; i++) {
-        let question = questions[i]
-        let questionVotes = questions[i].Question_likes;
-        let count = 0
-
-        for (let j = 0; j < questionVotes.length; j++) {
-            let questionLikes = questionVotes[j].question_votes
-            if (questionLikes === true) count++
-            else if (questionLikes === false) count--
-        }
+        let question = questions[i]        
+        const count = voteCounter(question)
 
         let newQuestion = new QuestionObject(question.id, question.question_title, question.question_body, question.Answers, count)
         questionsArr.push(newQuestion)
     }
-
 
     if (!user) {
         res.render('questions', {
@@ -72,6 +76,45 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
             session: user
         });
     }
+}))
+
+router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+    let answersArr = []
+    let user = req.session.auth
+
+    const questionsId = parseInt(req.params.id, 10)
+    const question = await Question.findByPk(questionsId, {
+        include: {
+            model: Question_like
+        }
+    })
+
+    const qCount = voteCounter(question)
+    console.log(qCount, "asdasdasdasda1123")
+
+    const answers = await Answer.findAll({
+        where: {
+            question_id: req.params.id
+        },
+        include: [Question, Answer_like]
+    })
+
+    for (let i = 0; i < answers.length; i++) {
+        let answer = answers[i]
+        let answerVotes = answers[i].Answer_likes;
+        let count = 0
+
+        for (let j = 0; j < answerVotes.length; j++) {
+            let answerLikes = answerVotes[j].answer_votes
+            if (answerLikes === true) count++
+            else if (answerLikes === false) count--
+        }
+
+        let newAnswer = new AnswerObject(answer.id, answer.answer_body, answer.user_id, count)
+        answersArr.push(newAnswer)
+    }
+    
+    res.render('questions-id', { answersArr, qCount, question, csrfToken: req.csrfToken(), session: user });
 }))
 
 router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
@@ -112,37 +155,6 @@ router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler
             errors
         });
     }
-}))
-
-router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
-    let answersArr = []
-    let user = req.session.auth
-
-    const questionsId = parseInt(req.params.id, 10)
-    const question = await Question.findByPk(questionsId)
-    const answers = await Answer.findAll({
-        where: {
-            question_id: req.params.id
-        },
-        include: [Question, Answer_like]
-    })
-
-    for (let i = 0; i < answers.length; i++) {
-        let answer = answers[i]
-        let answerVotes = answers[i].Answer_likes;
-        let count = 0
-
-        for (let j = 0; j < answerVotes.length; j++) {
-            let answerLikes = answerVotes[j].answer_votes
-            if (answerLikes === true) count++
-            else if (answerLikes === false) count--
-        }
-
-        let newAnswer = new AnswerObject(answer.id, answer.answer_body, answer.user_id, count)
-        answersArr.push(newAnswer)
-    }
-
-    res.render('questions-id', { answersArr, question, csrfToken: req.csrfToken(), session: user });
 }))
 
 
