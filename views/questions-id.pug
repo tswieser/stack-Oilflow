@@ -18,9 +18,9 @@ block content
                 each answer in answersArr
                     div(id='q-answers')
                         div(class="vote-container-1")
-                            button(class=`question_upvote` id=`${answer.id}`)
+                            button(class=`answer_upvote` id=`${answer.id}`)
                             div(class=`answer_vote_${answer.id} vote_count`)=answer.votes
-                            button(class=`question_downvote` id=`${answer.id}`)
+                            button(class=`answer_downvote` id=`${answer.id}`)
                         p(id='q-answer')=answer.body
         div(id="your-answer")
             form(id="answer-form")

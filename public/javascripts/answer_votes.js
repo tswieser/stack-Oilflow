@@ -14,16 +14,21 @@ window.addEventListener("DOMContentLoaded", e => {
             const vote = e.target.className;
             const answerId = e.target.id;
             const votes = document.querySelector(`.answer_vote_${answerId}`);
-
+            
+            console.log(answerId, vote, votes)
             if(vote === "answer_upvote"){
                 const upvote = async () => {
                     e.preventDefault();
                     const res = await fetch(`/votes/answers/${answerId}/upvote`, {
-                        method: "POST",
+                        method: "PUT",
                     });
                     const json = await res.json();
 
-                    votes.innerHTML = json.voteCount;
+                    if(json.error_vote){
+                        console.log("ERROR")
+                    }
+
+                    votes.innerHTML = json.new_vote;
                 }
 
                 upvote();
@@ -32,11 +37,10 @@ window.addEventListener("DOMContentLoaded", e => {
                 const downvote = async () => {
                     e.preventDefault();
                     const res = await fetch(`/votes/answers/${answerId}/downvote`, {
-                        method: "POST"
+                        method: "PUT"
                     })
                     const json = await res.json();
-
-                    votes.innerHTML = json.voteCount;
+                    votes.innerHTML = json.new_vote;
                 }
                 downvote();
             }

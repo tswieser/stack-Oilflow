@@ -113,15 +113,11 @@
     background-repeat: no-repeat;
     background-image: url("/images/vote_arrow.png");
 }
-.answer_downvote{
-    margin-left: 5px;
-}
-.answer_upvote{
-    margin-right: 5px;
-}
-.question_upvote{
+
+.question_upvote, .answer_upvote{
     margin-bottom: 10px;
 }
+
 .vote_count{
     display: flex;
     justify-self: center;
