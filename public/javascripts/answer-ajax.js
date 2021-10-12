@@ -5,7 +5,6 @@
 //post will hit backend server( set route )
 //res will add to list of answers
 //create node with answer and append
-//
 
 document.addEventListener('DOMContentLoaded', () => {
     const answerBtn = document.getElementById('submit-answer');
@@ -22,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({ answer_body: formVal.value, question_id: id, _csrf: cs }, formVal.value = "")
         })
+
         const result = await text.json();
         const container = document.getElementById('answer-container')
         container.innerHTML += `<div id="q-answers"> <p>${result.createAns.answer_body}</p></div>`
-
     })
 })

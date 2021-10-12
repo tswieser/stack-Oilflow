@@ -25,35 +25,129 @@ const questionVoteCounter = async function(questionId){
     return count;
 }
 
-apiRouter.post("/questions/:id(\\d+)/upvote", asyncHandler(async(req, res) => {
+
+//Question API helpers
+
+const alreadyVoted = async (userId, questionId) => {
+    let exVote = await Question_like.findOne({
+        where: {
+            user_id : userId,
+            question_id : questionId
+        }
+    })
+
+    if(exVote) return exVote.question_votes
+    else return null
+}
+
+const changeVote = async (userId, questionId) => {
+    let exVote = await Question_like.findOne({
+        where: [
+            {user_id : userId},
+            {question_id : questionId}
+        ]
+    })
+
+    await exVote.update({
+        question_votes: !exVote.question_votes
+    })
+    return exVote
+}
+
+//Answer API helpers
+
+const alreadyVotedAnswer = async (userId, answerId) => {
+    let exVote = await Answer_like.findOne({
+        where: [
+            {user_id : userId},
+            {answer_id : answerId}
+        ]
+    })
+
+    if(exVote) return exVote.answer_votes
+    else return null
+}
+
+const changeVoteAnswer = async (userId, answerId) => {
+    let exVote = await Answer_like.findOne({
+        where: [
+            {user_id : userId},
+            {answer_id : answerId}
+        ]
+    })
+
+    await exVote.update({
+        answer_votes: !exVote.answer_votes
+    })
+    return exVote
+}
+
+apiRouter.put("/questions/:id(\\d+)/upvote", asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const questionId = parseInt(req.params.id, 10);
 
-    await Question_like.create({
-        question_id: questionId,
-        question_votes: 1,
-        user_id: userId
-    })
+    const vote = await alreadyVoted(userId, questionId)
 
-    let voteCount = await questionVoteCounter(questionId);
-    res.json({voteCount})
+    if(vote === null){
+        await Question_like.create({
+            question_id: questionId,
+            question_votes: 1,
+            user_id: userId
+        })
+        let modifiedVote = await questionVoteCounter(questionId);
+        res.status(200).json({'new_vote': modifiedVote})
+        return
+    } else if(vote === true){
+        res.status(406).json({
+            status: 'error',
+            error_vote: vote
+        })
+        return
+    } else if(vote === false){
+        await changeVote(userId, questionId)
+        let modifiedVote = await questionVoteCounter(questionId);
+        res.status(200).json({'new_vote': modifiedVote})
+        return
+    }
+
+    // res.status(200).json({qCount})
 }));
 
-apiRouter.post("/questions/:id(\\d+)/downvote", asyncHandler(async(req, res) => {
+apiRouter.put("/questions/:id(\\d+)/downvote", asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const questionId = parseInt(req.params.id, 10);
 
-    await Question_like.create({
-        question_id: questionId,
-        question_votes: 0,
-        user_id: userId
-    })
+    const vote = await alreadyVoted(userId, questionId)
 
-    let voteCount = await questionVoteCounter(questionId);
-    res.json({voteCount})
+    if(vote === null){
+        await Question_like.create({
+            question_id: questionId,
+            question_votes: 0,
+            user_id: userId
+        })
+        let modifiedVote = await questionVoteCounter(questionId);
+        res.status(200).json({'new_vote': modifiedVote})
+        return
+    } else if(vote === false){
+        res.status(406).json({
+            status: 'error',
+            error_vote: vote
+        })
+        return
+    } else if(vote === true){
+        await changeVote(userId, questionId)
+        let modifiedVote = await questionVoteCounter(questionId);
+        res.status(200).json({'new_vote': modifiedVote})
+        return
+    }
+
+    let qCount = await questionVoteCounter(questionId);
+    res.json({qCount})
 }));
+
+//vote.isNewRecord
 
 
 //ANSWER LIKES API
@@ -78,31 +172,67 @@ const answerVoteCounter = async function(answerId){
     return count;
 }
 
-apiRouter.post(`/answers/:id(\\d+)/upvote`, asyncHandler(async(req, res) => {
+apiRouter.put(`/answers/:id(\\d+)/upvote`, asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const answerId = parseInt(req.params.id, 10);
 
-    await Answer_like.create({
-        answer_id: answerId,
-        answer_votes: 1,
-        user_id: userId
-    })
+    let vote = await alreadyVotedAnswer(userId, answerId)
 
-    let voteCount = await answerVoteCounter(answerId);
+    if(vote === null){
+        await Answer_like.create({
+            answer_id: answerId,
+            answer_votes: 1,
+            user_id: userId
+        })
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
+        return
+    } else if(vote === true){
+        res.status(406).json({
+            status: 'error',
+            error_vote: vote
+        })
+        return
+    } else if(vote === false){
+        await changeVoteAnswer(userId, answerId)
+
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
+        return
+    }
+
     res.json({voteCount})
 }));
 
-apiRouter.post(`/answers/:id(\\d+)/downvote`, asyncHandler(async(req, res) => {
+apiRouter.put(`/answers/:id(\\d+)/downvote`, asyncHandler(async(req, res) => {
 
     const userId = req.session.auth.userId;
     const answerId = parseInt(req.params.id, 10);
 
-    await Answer_like.create({
-        answer_id: answerId,
-        answer_votes: 0,
-        user_id: userId
-    })
+    let vote = await alreadyVotedAnswer(userId, answerId)
+
+    if(vote === null){
+        await Answer_like.create({
+            answer_id: answerId,
+            answer_votes: 0,
+            user_id: userId
+        })
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
+        return
+    } else if(vote === false){
+        res.status(406).json({
+            status: 'error',
+            error_vote: vote
+        })
+        return
+    } else if(vote === true){
+        await changeVoteAnswer(userId, answerId)
+        let voteCount = await answerVoteCounter(answerId);
+        res.status(200).json({'new_vote': voteCount})
+        return
+    }
 
     let voteCount = await answerVoteCounter(answerId);
     res.json({voteCount})

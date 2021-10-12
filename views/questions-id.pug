@@ -6,21 +6,22 @@ append head
 block content
     div(id='grid-container')
         p(class= "question_id" id=question.id)
-        div(class="vote-container-1")
-            button(id="question_upvote" class="question_upvote") 
-            button(id="question_downvote" class="question_downvote")
         p(id='q-title')=question.question_title
-        p(id='q-body')=question.question_body
-            //- div(class=`question_vote_${question.id} vote_count`)=question.votes
+            p(id='q-body')=question.question_body
+            div(class="vote-container-1")
+                button(id="question_upvote" class="question_upvote") 
+                div(id='question_vote_count')= `${qCount}`
+                button(id="question_downvote" class="question_downvote")
+        div(class=`question_vote_${question.id} vote_count`)=question.votes
         div(id="answer-container") Answers
             if answersArr
                 each answer in answersArr
                     div(id='q-answers')
-                        p=answer.body
-                            div(class="vote-container")
-                                button(class=`answer_upvote` id=`${answer.id}`)
-                                div(class=`answer_vote_${answer.id} vote_count`)=answer.votes
-                                button(class=`answer_downvote` id=`${answer.id}`)
+                        div(class="vote-container-1")
+                            button(class=`answer_upvote` id=`${answer.id}`)
+                            div(class=`answer_vote_${answer.id} vote_count`)=answer.votes
+                            button(class=`answer_downvote` id=`${answer.id}`)
+                        p(id='q-answer')=answer.body
         div(id="your-answer")
             form(id="answer-form")
                 input(type="hidden" name="_csrf" value=csrfToken id="_csrf")

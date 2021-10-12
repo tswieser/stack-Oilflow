@@ -51,10 +51,6 @@ const userValidator = [
     })
 ]
 
-
-
-
-
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -92,8 +88,5 @@ router.post('/new', csrfProtection, userValidator, asyncHandler(async (req, res,
     });
   }
 }))
-
-
-
 
 module.exports = router;
