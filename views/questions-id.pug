@@ -8,7 +8,7 @@ block content
         p(class= "question_id" id=question.id)
         div(class="vote-container-1")
             button(id="question_upvote" class="question_upvote") 
-            div(id='123')= `${qCount}`
+            div(id='question_vote_count')= `${qCount}`
             button(id="question_downvote" class="question_downvote")
         p(id='q-title')=question.question_title
         p(id='q-body')=question.question_body

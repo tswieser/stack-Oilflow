@@ -4,7 +4,6 @@ const { Answer_like, Question, Answer, Question_like } = require('../db/models')
 const { csrfProtection, asyncHandler, check, validationResult } = require('./utils');
 const { requireAuth } = require('../auth');
 
-
 class QuestionObject {
     constructor(id, title, body, answers, votes) {
         this.id = id,
@@ -78,6 +77,23 @@ router.get('/', csrfProtection, asyncHandler(async (req, res) => {
     }
 }))
 
+router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
+    let user = req.session.auth
+
+    if (!user) {
+        res.render("ask-question", {
+            title: "Ask Question",
+            csrfToken: req.csrfToken(),
+        })
+    } else {
+        res.render("ask-question", {
+            title: "Ask Question",
+            csrfToken: req.csrfToken(),
+            session: user,
+        })
+    }
+}))
+
 router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) => {
     let answersArr = []
     let user = req.session.auth
@@ -90,7 +106,6 @@ router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) =>
     })
 
     const qCount = voteCounter(question)
-    console.log(qCount, "asdasdasdasda1123")
 
     const answers = await Answer.findAll({
         where: {
@@ -115,23 +130,6 @@ router.get('/:id', requireAuth, csrfProtection, asyncHandler(async (req, res) =>
     }
     
     res.render('questions-id', { answersArr, qCount, question, csrfToken: req.csrfToken(), session: user });
-}))
-
-router.get('/ask', csrfProtection, asyncHandler(async (req, res) => {
-    let user = req.session.auth
-
-    if (!user) {
-        res.render("ask-question", {
-            title: "Ask Question",
-            csrfToken: req.csrfToken(),
-        })
-    } else {
-        res.render("ask-question", {
-            title: "Ask Question",
-            csrfToken: req.csrfToken(),
-            session: user,
-        })
-    }
 }))
 
 router.post('/ask', requireAuth, csrfProtection, questionValidator, asyncHandler(async (req, res, next) => {
