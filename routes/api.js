@@ -65,6 +65,9 @@ apiRouter.put("/questions/:id(\\d+)/upvote", asyncHandler(async(req, res) => {
             question_votes: 1,
             user_id: userId
         })
+        let modifiedVote = await questionVoteCounter(questionId);
+        res.status(200).json({'new_vote': modifiedVote})
+        return
     } else if(vote === true){
         res.status(406).json({
             status: 'error',
@@ -94,6 +97,9 @@ apiRouter.put("/questions/:id(\\d+)/downvote", asyncHandler(async(req, res) => {
             question_votes: 0,
             user_id: userId
         })
+        let modifiedVote = await questionVoteCounter(questionId);
+        res.status(200).json({'new_vote': modifiedVote})
+        return
     } else if(vote === false){
         res.status(406).json({
             status: 'error',
