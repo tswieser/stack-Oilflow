@@ -2,13 +2,13 @@
 extends index
 
 block content
-        div
-          div.form_container
         if errors
           div(class='error_holder')
             ul.error_list
                 each err in errors
                     li=err
+        div
+          div.form_container
             form(action="/users/login" method="post" class= "signup")
               input(type="hidden" name="_csrf" value=csrfToken)
               div
